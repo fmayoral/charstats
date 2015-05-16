@@ -1,0 +1,14 @@
+/* Radial Progress custom colors */
+.radial-progress.blood-red .circle .mask .fill { background-color: #a71d1d; }
+.radial-progress.blood-red .inset .percentage .numbers span { color: #a71d1d; }
+
+.radial-progress.experience-green .circle .mask .fill { background-color: #1da72e; }
+.radial-progress.experience-green .inset .percentage .numbers span { color: #1da72e; }
+
+/* Ataques */
+.attack-values { font-size: 3em; }
+
+/* Weapon Stats */
+.table > tbody > tr > th {
+  width: 120px;
+}

@@ -1,0 +1,30 @@
+<template name="dashboard">
+  <h1 class="page-header">Dashboard</h1>
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-3 placeholders">
+      {{> widgetBar life}}
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholders">
+      {{> widgetBar experience}}
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      {{> widgetAttack }}
+      {{> widgetHealthInput }}
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          {{> widgetDistanceInput }}
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          {{> widgetRoundTypeInput }}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <h2 class="sub-header">Inventario</h2>
+  {{> inventario}}
+  {{> widgetFeats }}
+
+</template>

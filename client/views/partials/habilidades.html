@@ -1,0 +1,10 @@
+<template name="habilidades">
+  {{#each habilidad}}
+    <a class="list-group-item {{ activationStatus }}">
+      
+      {{#if this.feat.pasive}}<span class="badge">Pasiva</span>{{/if}}
+      <h4 class="list-group-item-heading"><i class="fa fa-toggle-{{#if this.active}}on{{else}}off{{/if}} toggle-feat"></i> {{this.feat.name}}</h4>
+      <p class="list-group-item-text">{{this.feat.desc}}</p>
+    </a>
+  {{/each}}
+</template>
