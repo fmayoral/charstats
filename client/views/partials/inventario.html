@@ -1,14 +1,14 @@
 <template name="inventario">
   <h3>Armas</h3>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="list-group">
         {{#each armas}}
           <a href="#" class="list-group-item weapon-btn">{{this.desc}} {{#if this.inUse}}<span class="badge">active</span>{{/if}}</a>
         {{/each}}
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
       {{> weaponStats }}
     </div>
   </div>
