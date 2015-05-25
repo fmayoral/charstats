@@ -1,5 +1,10 @@
 if (Meteor.isClient) {
-
+  Template.login.helpers({
+    userLogged: function () {
+      return Meteor.user();
+    }
+  });
+  
   Template.titulo.helpers({
     appTitle: function(){
       return 'charStats';
@@ -33,15 +38,18 @@ if (Meteor.isClient) {
   });
 
   Template.habilidades.helpers({
-    habilidad: function(){
+    habilidades: function(){
       var pj = Session.get('active-pj');
       return pj.habilidades;
     },
+    habilidad: function(){
+      return Habilidades[this.bundle][this.id];
+    },
     activationStatus: function(){
       var pj = Session.get('active-pj');
-      if( CharStats.funciones.aplicarEfecto(pj, this)){
+      if( CharStats.funciones.aplicarEfecto(pj, Habilidades[this.bundle][this.id])){
         if (this.active) { return 'list-group-item-success';}
-        if (!this.active && this.feat.pasive) { return 'list-group-item-danger';}
+        if (!this.active && Habilidades[this.bundle][this.id].pasive) { return 'list-group-item-danger';}
         return '';
       }
       return 'disabled';

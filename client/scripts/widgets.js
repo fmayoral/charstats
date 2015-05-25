@@ -43,6 +43,23 @@ if (Meteor.isClient) {
     }
   });  
 
+  Template.widgetExperienceInput.events({
+    'click .btn-submit-experience': function (e) {
+      e.preventDefault();
+      var val = $('#xp-input').val();
+      if(!isNaN(parseInt(val))){
+        var type = $(e.currentTarget).attr('data-value');
+        var ammount = parseInt(val);
+        if(type == 'remove') {
+          ammount *= -1;
+        }
+        CharStats.funciones.modExperience(ammount);
+        $('#xp-input').val('');
+        CharStats.funciones.updateCharStats();
+      }
+    }
+  });  
+
   Template.widgetRoundTypeInput.events({
     'click .btn-round-type': function (e) {
       e.preventDefault();

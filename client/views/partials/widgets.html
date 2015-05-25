@@ -51,11 +51,44 @@
     </div>
     <div class="panel-body">
       <form class="form-inline health-form">
-        <a type="button" class="btn btn-default btn-danger btn-submit-health" data-value="damage">Damage</a>
-        <div class="form-group">
-          <input type="number" class="form-control" id="hp-input" placeholder="Hitpoints">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <input type="number" class="form-control" id="hp-input" placeholder="Hitpoints">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <a type="button" class="btn btn-default btn-danger btn-submit-health" data-value="damage">Damage</a>
+              <a type="button" class="btn btn-default btn-success btn-submit-health" data-value="heal">Heal</a>
+            </div>
+          </div>
         </div>
-        <a type="button" class="btn btn-default btn-success btn-submit-health" data-value="heal">Heal</a>
+      </form>
+    </div>
+  </div>
+</template>
+
+<template name="widgetExperienceInput">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Experience</h3>
+    </div>
+    <div class="panel-body">
+      <form class="form-inline experience-form">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <input type="number" class="form-control" id="xp-input" placeholder="Experience">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <a type="button" class="btn btn-default btn-danger btn-submit-experience" data-value="remove">Remove</a>
+              <a type="button" class="btn btn-default btn-success btn-submit-experience" data-value="add">Add</a>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   </div>

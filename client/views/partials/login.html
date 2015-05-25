@@ -1,0 +1,18 @@
+<template name="login">
+  <div class="jumbotron">
+    <div class="container">
+      {{#if userLogged}}
+        <h2>Seleccione su personaje</h2>
+        <ul>
+          <li>Pj 1</li>
+          <li>Pj 2</li>
+        </ul>
+      {{else}}
+      <h1>Bienvenido!</h1>
+      <p>Utilice su cuenta de Google para ingresar a la aplicación</p>
+      <p></p>
+        <p>{{> loginButtons}}</p>
+      {{/if}}
+    </div>
+  </div>
+</template>

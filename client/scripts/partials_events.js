@@ -18,7 +18,7 @@ if (Meteor.isClient) {
   Template.habilidades.events({
     'click .toggle-feat': function (e) {
       e.preventDefault();
-      CharStats.funciones.toggleFeat(this.feat._id);
+      CharStats.funciones.toggleFeat(this.id);
     }
   });  
 }
