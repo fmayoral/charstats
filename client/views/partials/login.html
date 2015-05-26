@@ -3,10 +3,7 @@
     <div class="container">
       {{#if userLogged}}
         <h2>Seleccione su personaje</h2>
-        <ul>
-          <li>Pj 1</li>
-          <li>Pj 2</li>
-        </ul>
+        {{> charList}}
       {{else}}
       <h1>Bienvenido!</h1>
       <p>Utilice su cuenta de Google para ingresar a la aplicación</p>

@@ -19,17 +19,43 @@ Router.onBeforeAction(function() {
   Session.set('active-pj', Personajes.findOne({'_id': Session.get('charName')}));
   CharStats.funciones.updateCharStats();
   this.next();
-}, {except: ['login']});
+}, {only: ['dashboard']});
+
 
 //Routes
-Router.route('/login', function () {
-  this.layout('login-container');
-  this.render('login', {
-  });
-});
-
 Router.route('/', function () {
-  this.render('dashboard', {
-    data: function () { return Personajes.findOne({_id: 'xanxo'}); }
-  });
-})
+    this.layout('loginContainer');
+    this.render('login', {});
+  },
+  {
+    name: 'home'
+  }
+);
+
+Router.route('/login', function () {
+    this.layout('loginContainer');
+    this.render('login', {});
+  },
+  {
+    name: 'login'
+  }
+);
+
+Router.route('/char/new', function () {
+    this.layout('loginContainer');
+    this.render('charNew', {});
+  },
+  {
+    name: 'newChar'
+  }
+);
+
+Router.route('/dashboard', function () {
+    this.render('dashboard', {
+      data: function () { return Personajes.findOne({_id: 'xanxo'}); }
+    });
+  },
+  {
+    name: 'dashboard'
+  }
+);
