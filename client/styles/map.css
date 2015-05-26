@@ -20,7 +20,7 @@ div.tresD {
   /* Estilo para evitar iconos borrosos */
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;  
+  transform-style: preserve-3d;
 }
 
 #canvas > div.celda {

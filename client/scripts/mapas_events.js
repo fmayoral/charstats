@@ -75,8 +75,7 @@ if (Meteor.isClient) {
     },
 
     'click .background-mapa': function(event){
-      console.log(event.offsetX);
-      console.log(event.offsetY);
+      console.log('r:'+Math.ceil(event.offsetY/50)+' c:'+Math.ceil(event.offsetX/50));
     },
     
     'click .celda': function(event){

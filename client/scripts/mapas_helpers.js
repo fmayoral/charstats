@@ -49,7 +49,7 @@ if (Meteor.isClient) {
     },
     criaturas: function (){
       if(Session.get('action') == 'play') {
-        return Criaturas.find({'map': Session.get('map'), 'positionSet':true});
+        //return Criaturas.find({'map': Session.get('map'), 'positionSet':true});
       }
       return null;
     },
