@@ -1,5 +1,6 @@
 Meteor.methods({
   createPj: function(data){
+    //@todo Deberia recibir un objeto con los datos y armar la estructura del pj luego de validar que esta toda la informacion necesaria
     var loggedInUser = Meteor.user();
     if(data.info == {}){ throw new Meteor.Error(500, "Fatal error");}
 

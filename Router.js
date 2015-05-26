@@ -1,7 +1,7 @@
 //Default config
 Router.configure({
   // the default layout
-  layoutTemplate: 'container'
+  layoutTemplate: 'defaultContainer'
 });
 
 //Aux functions
@@ -24,7 +24,6 @@ Router.onBeforeAction(function() {
 
 //Routes
 Router.route('/', function () {
-    this.layout('loginContainer');
     this.render('login', {});
   },
   {
@@ -33,7 +32,6 @@ Router.route('/', function () {
 );
 
 Router.route('/login', function () {
-    this.layout('loginContainer');
     this.render('login', {});
   },
   {
@@ -42,7 +40,6 @@ Router.route('/login', function () {
 );
 
 Router.route('/char/new', function () {
-    this.layout('loginContainer');
     this.render('charNew', {});
   },
   {
@@ -50,10 +47,59 @@ Router.route('/char/new', function () {
   }
 );
 
+Router.route('/maps', function () {
+    this.render('mapList', {});
+    if (Roles.userIsInRole(Meteor.user(), ['master'])) {
+      this.layout('sideBarContainer');
+      this.render('mastertoolbar', {to: 'sidebar'});
+    }
+  },
+  {
+    name: 'mapList'
+  }
+);
+
+Router.route('/maps/new', function () {
+    this.layout('sideBarContainer');
+    this.render('newmap', {});
+    this.render('mastertoolbar', {to: 'sidebar'});
+  },
+  {
+    name: 'newmap'
+  }
+);
+
+Router.route('/maps/play/:_id', function () {
+    this.layout('simpleContainer');
+    this.render('mapaPlay', {
+      data: function () {
+        Session.set('map', this.params._id);
+        Session.set('action', 'play');
+        return Mapas.findOne({_id: this.params._id});
+      }
+    });
+  },
+  {
+    name: 'playmap'
+  }
+);
+
+Router.route('/master-tools', function () {
+    this.layout('sideBarContainer');
+    this.render('mastertools', {});
+    this.render('mastertoolbar', {to: 'sidebar'});
+  },
+  {
+    name: 'mastertools'
+  }
+);
+
 Router.route('/dashboard', function () {
+    this.layout('sideBarContainer');
     this.render('dashboard', {
       data: function () { return Personajes.findOne({_id: 'xanxo'}); }
     });
+    this.render('dashboardsidebar', {to: 'sidebar'});
   },
   {
     name: 'dashboard'

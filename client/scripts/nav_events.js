@@ -9,6 +9,12 @@ if (Meteor.isClient) {
         case 'home':
           Router.go('home');
           break;
+        case 'playMap':
+          Router.go('playMap');
+          break;
+        case 'mastertools':
+          Router.go('mastertools');
+          break;
         case 'logout':
           Meteor.logout();
           break;
