@@ -48,6 +48,7 @@ Router.route('/char/new', function () {
 );
 
 Router.route('/maps', function () {
+    Session.set('map', null);
     this.render('mapList', {});
     if (Roles.userIsInRole(Meteor.user(), ['master'])) {
       this.layout('sideBarContainer');
