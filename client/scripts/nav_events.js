@@ -1,8 +1,24 @@
 if (Meteor.isClient) {
   Template.nav.events({
-    'click .logout': function (e) {
+    'click a': function (e) {
       e.preventDefault();
-      Meteor.logout();
+      switch($(e.currentTarget).attr('data-route')){
+        case 'dashboard':
+          Router.go('dashboard');
+          break;
+        case 'home':
+          Router.go('home');
+          break;
+        case 'playMap':
+          Router.go('playMap');
+          break;
+        case 'mastertools':
+          Router.go('mastertools');
+          break;
+        case 'logout':
+          Meteor.logout();
+          break;
+      }
     }
   });
 

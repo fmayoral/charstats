@@ -11,13 +11,6 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.nav.helpers({
-    character: function(){
-      var pj = Session.get('active-pj');
-      return pj;
-    }
-  });
-
   Template.inventario.helpers({
     armas: function(){
       var pj = Session.get('active-pj');

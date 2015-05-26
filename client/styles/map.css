@@ -1,0 +1,61 @@
+#canvas {
+  position: relative;
+  transition: .3s;
+  transform-style: preserve-3d;
+}
+
+div.canvas-wrapper {
+  perspective: 1000px;
+}
+
+div.tresD {
+  transform: rotatex(50deg) translatey(-30em) translatex(2.5em);
+}
+
+#canvas div { 
+  position: absolute;
+  height: 50px;
+  width: 50px;
+
+  /* Estilo para evitar iconos borrosos */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+#canvas > div.celda {
+  background-color: #f4f4f4;
+  color: #e3170d;
+  text-align: center;
+  border: 1px dashed gray;
+}
+
+/* Iconos */
+#canvas div.celda > i {
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+#canvas div.celda > .fa-ban { color: #000;}
+#canvas div.celda.vacio > .fa-ban { color: #ffffff;}
+
+/*Terrenos*/
+#canvas div.celda.default{ background-color: #f4f4f4;}
+
+#canvas div.celda.pasto{ background-color: #4dbd33;}
+#canvas div.celda.tierra{ background-color: #8b4513;}
+#canvas div.celda.lago{ background-color: #50a6c2;}
+#canvas div.celda.mar{ background-color: #23238e;}
+#canvas div.celda.piedra{ background-color: #4f4f4f;}
+#canvas div.celda.nieve{ background-color: #8b8989;}
+#canvas div.celda.vacio{ background-color: #1a1a1a;}
+#canvas div.celda.transparente{ background-color: transparent;}
+
+/*Mapas*/
+div.background-mapa { background-repeat: no-repeat; }
+
+div.background-mapa.habitacion-1 { background-image: url("img/habitacion-1-500x400.png"); }
+div.background-mapa.village-7 { background-image: url("img/village-07-500x400.jpg"); }
+div.background-mapa.swamp-1 { background-image: url("img/Swamp1_1500x1200.jpg"); }
+div.background-mapa.town-square { background-image: url("img/Town_Square_1500x1200.jpg"); }
+div.background-mapa.town-square-2 { background-image: url("img/Town_Square_2_1500x1200.jpg"); }
