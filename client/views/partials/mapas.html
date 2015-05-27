@@ -108,11 +108,11 @@
     <div id="canvas" style="{{altura}}" data-id="{{_id}}">
       <div class="background-mapa {{desc}}" style="{{backgroundSize}}"></div>
       {{#each npcs}}
-        <div class="{{estilo}} {{clase}} criatura size-{{tamanio}}" style="{{position}}" data-id="{{_id}}" data-name="{{nombre}}">
+        <div class="{{estilo}} {{toLowerCase info.class}} criatura size-{{toLowerCase info.size}}" style="{{position}}" data-id="{{_id}}" data-name="{{info.name}}">
           <div class="flat"></div>
-          <div class="stand-up"></div>
         </div>
       {{/each}}
+      <div class="click-layer" style="{{backgroundSize}}"></div>
     </div>
   </div>
 </template>

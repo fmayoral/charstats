@@ -92,7 +92,7 @@ if (Meteor.isClient) {
       }
     },
 
-    'click .background-mapa': function(event){
+    'click .click-layer': function(event){
       var cellRow = Math.floor(event.offsetY/50);
       var cellCol = Math.floor(event.offsetX/50);
       var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
@@ -108,9 +108,7 @@ if (Meteor.isClient) {
             });
           }
           break;
-
       }
-      console.log('r:'+cellRow+' c:'+cellCol+' m:'+mapId);
     },
     
     'click .celda': function(event){

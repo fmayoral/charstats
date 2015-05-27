@@ -21,11 +21,13 @@ if (Meteor.isClient) {
       e.preventDefault();
       var newPj = {};
       newPj.info = {};
+      newPj.type = 'user'; //type = npc for monsters and characters created by masters
       newPj.position = {};
       
       newPj.owner = Meteor.user()._id;
       newPj.info.name = $('#char-name').val();
       newPj.info.class = $('#char-class').val();
+      newPj.info.size = $('#char-size').val();
 
       //@todo bloquear boton de crear mientras el server procesa el request
       Meteor.call('createPj',newPj,function(error, result){

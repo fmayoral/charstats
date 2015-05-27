@@ -30,7 +30,11 @@ Paladin blanco
 npc marron
 */
 
-#canvas div.criatura > .flat { border: 2px solid red; }
+#canvas div.criatura > .flat {
+  border: 2px solid red;
+  width: 100%;
+  height: 100%;
+}
 
 #canvas div.criatura.non-selectable {
   opacity: 0.5;
@@ -49,7 +53,7 @@ npc marron
 
 #canvas div.criatura > .flat, div.criaturaSB > .flat {
   background-color: transparent!important;
-  border-radius: 25px;
+  border-radius: 50%;
 }
 
 .tresD > div.criatura > .flat { background: radial-gradient(black, #dddddd); }
