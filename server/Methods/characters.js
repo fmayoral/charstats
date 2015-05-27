@@ -15,6 +15,22 @@ Meteor.methods({
     } else {
       throw new Meteor.Error(403, "Not authorized to create characters");      
     }
-    
   },
+  setCharPosition: function(charId, row, col, mapId){
+    var pj = Characters.findOne({'_id':charId});
+    //@todo Tener en cuenta cuando el master es el que mueve
+    if(pj.owner == Meteor.user()._id){
+      var position = {
+        'map': mapId,
+        'index': {
+          'r':row,
+          'c':col
+        }
+      };
+      Characters.update({'_id':charId},{'$set': {'position': position}});
+    } else {
+      throw new Meteor.Error(403, "Not authorized to move this character");
+    }
+  },
+
 });

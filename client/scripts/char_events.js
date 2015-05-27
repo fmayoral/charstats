@@ -21,7 +21,7 @@ if (Meteor.isClient) {
       e.preventDefault();
       var newPj = {};
       newPj.info = {};
-      newPj.mapas = [];
+      newPj.position = {};
       
       newPj.owner = Meteor.user()._id;
       newPj.info.name = $('#char-name').val();

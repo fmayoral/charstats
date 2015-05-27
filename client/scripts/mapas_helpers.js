@@ -32,7 +32,7 @@ if (Meteor.isClient) {
       }
     },
     position: function (){
-      var pos = "top:"+this.index.r *50+"px; left:"+this.index.c *50+"px;";
+      var pos = "top:"+this.position.index.r *50+"px; left:"+this.position.index.c *50+"px;";
       return pos;
     },
     backgroundSize: function (){
@@ -53,15 +53,29 @@ if (Meteor.isClient) {
         return description;
       }
     },
-    criaturas: function (){
-      if(Session.get('mapAction') == 'play') {
-        //return Criaturas.find({'map': Session.get('map'), 'positionSet':true});
-      }
-      return null;
+    npcs: function (){
+      return Characters.find({'position.map': Session.get('map')});
     },
     isActive: function(command){
       if(Session.get('mapAction') == command) {
         return 'active';
+      }
+    },
+    actionTextHelper: function(){
+      switch(Session.get('mapAction')){
+        case 'play':
+          if (Session.get('selected_char_id')) {
+            return 'Ubicar personaje';
+          } else {
+            return 'Seleccione un personaje';
+          }
+          break;
+        case 'target':
+          return 'Seleccionar objetivo';
+          break;
+        default:
+          return 'Seleccione una accion';
+          break;
       }
     },
   });

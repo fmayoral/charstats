@@ -73,12 +73,43 @@ if (Meteor.isClient) {
       Router.go('mapList');
     },
 
-    'click .background-mapa': function(event){
-      var cellRow = Math.ceil(event.offsetY/50);
-      var cellCol = Math.ceil(event.offsetX/50);
-      var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
-      var mapa = Mapas.findOne({_id:mapId});
+    'click .pj-move': function(event){
+      Session.set('mapAction','play');
+    },
 
+    'click .pj-target': function(event){
+      Session.set('mapAction','target');
+    },
+
+    'click .pj-remove': function(event){
+      var charId = Session.get('selected_char_id');
+      if (charId) {
+        Meteor.call('setCharPosition', charId, null, null, null, function(error, result){
+          if (error) {
+            alert(error.message);
+          }      
+        });
+      }
+    },
+
+    'click .background-mapa': function(event){
+      var cellRow = Math.floor(event.offsetY/50);
+      var cellCol = Math.floor(event.offsetX/50);
+      var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
+
+      switch(Session.get('mapAction')){
+        case 'play':
+          var charId = Session.get('selected_char_id');
+          if (charId) {
+            Meteor.call('setCharPosition', charId, parseInt(cellRow), parseInt(cellCol), mapId, function(error, result){
+              if (error) {
+                alert(error.message);
+              }      
+            });
+          }
+          break;
+
+      }
       console.log('r:'+cellRow+' c:'+cellCol+' m:'+mapId);
     },
     
