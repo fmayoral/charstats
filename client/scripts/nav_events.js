@@ -9,8 +9,8 @@ if (Meteor.isClient) {
         case 'home':
           Router.go('home');
           break;
-        case 'playMap':
-          Router.go('playMap');
+        case 'playmemorymap':
+          Router.go('playmemorymap');
           break;
         case 'mastertools':
           Router.go('mastertools');

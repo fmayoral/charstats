@@ -12,7 +12,7 @@ Meteor.methods({
       }
       if(data.descripcion == "") { throw new Meteor.Error(403, "Empty description"); }
 
-
+/*
       for(var i = 0;i<data.alto;i++){
         for(var j = 0;j<data.ancho;j++){
           mapa.grilla.push({
@@ -25,6 +25,7 @@ Meteor.methods({
           });
         }
       }
+*/      
       var newId = Mapas.insert(mapa);
       return {id: newId};
     } else {

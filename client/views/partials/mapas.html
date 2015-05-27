@@ -88,12 +88,15 @@
     <button type="button" class="btn btn-default btn-xs tresd-toggle">
        <i class="fa fa-cube"></i>
     </button>
-    <button type="button" class="btn btn-default btn-xs sidebar-toggle">
-       <i class="fa fa-bars"></i>
+    <button type="button" class="btn btn-default btn-xs map-change">
+       <i class="fa fa-th"></i>
+    </button>
+    <button type="button" class="btn btn-default btn-xs pj-move {{isActive 'play'}}">
+      <i class="fa fa-arrows"></i>
     </button>
    </p>
   </div>
-  <div class="canvas-wrapper">
+  <div class="canvas-wrapper" style="{{canvasWidth}}">
     <div id="canvas" style="{{altura}}" data-id="{{_id}}">
       <div class="background-mapa {{desc}}" style="{{backgroundSize}}"></div>
       {{#each criaturas}}

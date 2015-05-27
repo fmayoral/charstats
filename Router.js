@@ -75,13 +75,27 @@ Router.route('/maps/play/:_id', function () {
     this.render('mapaPlay', {
       data: function () {
         Session.set('map', this.params._id);
-        Session.set('action', 'play');
+        Session.set('mapAction', 'play');
         return Mapas.findOne({_id: this.params._id});
       }
     });
   },
   {
     name: 'playmap'
+  }
+);
+
+Router.route('/maps/play', function () {
+    var inMemoryMap = Session.get('map');
+    this.layout('simpleContainer');
+    if(inMemoryMap){
+      Router.go('playmap', {'_id':inMemoryMap});
+    } else {
+      Router.go('mapList');
+    }
+  },
+  {
+    name: 'playmemorymap'
   }
 );
 

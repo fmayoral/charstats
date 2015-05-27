@@ -41,6 +41,12 @@ if (Meteor.isClient) {
         return size;
       }
     },
+    canvasWidth: function (){
+      if(this.info){
+        var size = "width:"+this.info.ancho *50+"px;";
+        return size;
+      }
+    },
     desc: function (){
       if(this.info){
         var description = this.info.descripcion.replace(/\s+/g, '-').toLowerCase();
@@ -48,10 +54,15 @@ if (Meteor.isClient) {
       }
     },
     criaturas: function (){
-      if(Session.get('action') == 'play') {
+      if(Session.get('mapAction') == 'play') {
         //return Criaturas.find({'map': Session.get('map'), 'positionSet':true});
       }
       return null;
+    },
+    isActive: function(command){
+      if(Session.get('mapAction') == command) {
+        return 'active';
+      }
     },
   });
 

@@ -31,8 +31,7 @@ if (Meteor.isClient) {
           //@todo desbloquear boton de crear
         } else {
           //Redirect to id
-          //Router.go('editMapa', {_id: result.id});
-          console.log('Created!');
+          Router.go('mapList');
         }
       });
       //@todo bloquear boton de crear  
@@ -70,12 +69,17 @@ if (Meteor.isClient) {
       $('#canvas').toggleClass('tresD');
     },
     
-    'click .sidebar-toggle': function(event){
-      $('#wrapper').toggleClass('toggled');
+    'click .map-change': function(event){
+      Router.go('mapList');
     },
 
     'click .background-mapa': function(event){
-      console.log('r:'+Math.ceil(event.offsetY/50)+' c:'+Math.ceil(event.offsetX/50));
+      var cellRow = Math.ceil(event.offsetY/50);
+      var cellCol = Math.ceil(event.offsetX/50);
+      var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
+      var mapa = Mapas.findOne({_id:mapId});
+
+      console.log('r:'+cellRow+' c:'+cellCol+' m:'+mapId);
     },
     
     'click .celda': function(event){
@@ -85,7 +89,7 @@ if (Meteor.isClient) {
       var cellRow = $(event.currentTarget).attr('data-row');
       var cellCol = $(event.currentTarget).attr('data-column');
 
-      switch(Session.get('action')){
+      switch(Session.get('mapAction')){
         case 'edit':
           for(var i=0;i<mapa.grilla.length;i++){
             if(mapa.grilla[i].index.r == cellRow && mapa.grilla[i].index.c == cellCol){
