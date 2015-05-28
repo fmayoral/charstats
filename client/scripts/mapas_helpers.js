@@ -35,6 +35,14 @@ if (Meteor.isClient) {
       var pos = "top:"+this.position.index.r *50+"px; left:"+this.position.index.c *50+"px;";
       return pos;
     },
+    textCenter: function (){
+      var pj = $('div').find("[data-id='" + this._id + "']");
+      console.log(pj);
+      return "line-height: "+pj.height()+"px;";
+    },
+    shortName: function (name){
+      return name.slice(0,2);
+    },
     backgroundSize: function (){
       if(this.info){
         var size = "height:"+this.info.alto *50+"px; width:"+this.info.ancho *50+"px;";
@@ -56,10 +64,18 @@ if (Meteor.isClient) {
     npcs: function (){
       return Characters.find({'position.map': Session.get('map')});
     },
-    isActive: function(command){
+    isAction: function(command){
       if(Session.get('mapAction') == command) {
         return 'active';
       }
+    },
+    isPjActive: function(){
+      if(Session.get('selected_char_id') == this._id) {
+        return 'current';
+      }
+    },
+    isTargeting: function(){
+      return Session.get('mapAction') == 'target';
     },
     actionTextHelper: function(){
       switch(Session.get('mapAction')){

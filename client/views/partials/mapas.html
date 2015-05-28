@@ -92,10 +92,10 @@
        <i class="fa fa-th"></i>
     </button>
     | actions
-    <button type="button" class="btn btn-default btn-xs pj-move {{isActive 'play'}}">
+    <button type="button" class="btn btn-default btn-xs pj-move {{isAction 'play'}}">
       <i class="fa fa-arrows"></i>
     </button>
-    <button type="button" class="btn btn-default btn-xs pj-target {{isActive 'target'}}">
+    <button type="button" class="btn btn-default btn-xs pj-target {{isAction 'target'}}">
       <i class="fa fa-crosshairs"></i>
     </button>
     <button type="button" class="btn btn-default btn-xs pj-remove">
@@ -108,11 +108,11 @@
     <div id="canvas" style="{{altura}}" data-id="{{_id}}">
       <div class="background-mapa {{desc}}" style="{{backgroundSize}}"></div>
       {{#each npcs}}
-        <div class="{{estilo}} {{toLowerCase info.class}} criatura size-{{toLowerCase info.size}}" style="{{position}}" data-id="{{_id}}" data-name="{{info.name}}">
-          <div class="flat"></div>
+        <div class="{{estilo}} {{toLowerCase info.class}} criatura size-{{toLowerCase info.size}} {{isPjActive}}" style="{{position}}" data-id="{{_id}}" data-name="{{info.name}}">
+          <div class="flat" style="{{textCenter}}">{{shortName info.name}}</div>
         </div>
       {{/each}}
-      <div class="click-layer" style="{{backgroundSize}}"></div>
+      <div class="click-layer{{#if isTargeting}} hide{{/if}}" style="{{backgroundSize}}"></div>
     </div>
   </div>
 </template>
