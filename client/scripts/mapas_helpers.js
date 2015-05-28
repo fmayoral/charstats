@@ -37,7 +37,6 @@ if (Meteor.isClient) {
     },
     textCenter: function (){
       var pj = $('div').find("[data-id='" + this._id + "']");
-      console.log(pj);
       return "line-height: "+pj.height()+"px;";
     },
     shortName: function (name){
