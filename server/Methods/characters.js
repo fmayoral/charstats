@@ -17,6 +17,16 @@ Meteor.methods({
       throw new Meteor.Error(403, "Not authorized to create characters");      
     }
   },
+  removePj: function(charId){
+    //@todo Deberia recibir un objeto con los datos y armar la estructura del pj luego de validar que esta toda la informacion necesaria
+    var loggedInUser = Meteor.user();
+    var pj = Characters.findOne({'_id':charId});
+    if(pj.owner == Meteor.user()._id){
+      Characters.remove(charId);
+    } else {
+      throw new Meteor.Error(403, "Not authorized to create characters");      
+    }
+  },
   setCharPosition: function(charId, row, col, mapId){
     var pj = Characters.findOne({'_id':charId});
     //@todo Tener en cuenta cuando el master es el que mueve
