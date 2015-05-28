@@ -12,12 +12,12 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Overview</a></li>
+          <li class="hide"><a href="#" data-route="dashboard">Overview</a></li>
           <li><a href="#" data-route="playmemorymap">Map</a></li>
           {{#if isInRole 'master'}}
             <li><a href="#" data-route="mastertools">Master Tools</a></li>
           {{/if}}
-          <li><a href="#">Account</a></li>
+          <li class="hide"><a href="#">Account</a></li>
           <li><a href="#" data-route="logout">Logout</a></li>
         </ul>
         <form class="navbar-form navbar-right">
