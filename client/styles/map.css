@@ -55,6 +55,8 @@ div.tresD {
 #canvas div.celda.transparente{ background-color: transparent;}
 
 /*Mapas*/
+div.click-layer { z-index: 1000; }
+
 div.background-mapa { background-repeat: no-repeat; }
 
 div.background-mapa.habitacion-1 { background-image: url("img/habitacion-1-500x400.png"); }
