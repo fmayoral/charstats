@@ -109,3 +109,14 @@ Router.route('/master-tools', function () {
   }
 );
 
+Router.route('/dashboard', function () {
+    this.layout('sideBarContainer');
+    this.render('dashboard', {
+      data: function () { return Personajes.findOne({_id: 'xanxo'}); }
+    });
+    this.render('dashboardsidebar', {to: 'sidebar'});
+  },
+  {
+    name: 'dashboard'
+  }
+);
