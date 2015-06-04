@@ -19,6 +19,7 @@ if (Meteor.isClient) {
       data.alto = $('#altoMapa').val();
       data.descripcion = $('#descripcionMapa').val();
       data.terrenoDefault = $('#terrenoMapa').val();
+      data.mapBackground = $('input[name=fondosRadios]:checked').val();
       if(data.terrenoDefault == '') { data.terrenoDefault = 'default'; }
       
       //Como el terreno se usa como clase de CSS, debe ser lowerCase
@@ -35,7 +36,6 @@ if (Meteor.isClient) {
         }
       });
       //@todo bloquear boton de crear  
-
     },
   });
 

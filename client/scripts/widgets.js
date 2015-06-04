@@ -4,6 +4,10 @@ if (Meteor.isClient) {
     currentDistance: function(){
       var pj = Session.get('active-pj');
       return pj.info.distance_target;
+    },
+    currentDistanceMts: function(){
+      var pj = Session.get('active-pj');
+      return Math.floor(pj.info.distance_target * 0.3048);
     }
   });
 

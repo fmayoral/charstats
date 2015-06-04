@@ -7,10 +7,11 @@ Meteor.methods({
       mapa.info = data;
       mapa.grilla = [];
       
-      if(data.alto<1 || data.alto>50 || data.ancho<1 || data.ancho>50) {
+      if(data.alto<1 || data.alto>75 || data.ancho<1 || data.ancho>75) {
         throw new Meteor.Error(403, "Wrong size");
       }
       if(data.descripcion == "") { throw new Meteor.Error(403, "Empty description"); }
+      if(data.mapBackground == "") { throw new Meteor.Error(403, "Empty map background"); }
 
 /*
       for(var i = 0;i<data.alto;i++){
