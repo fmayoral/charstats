@@ -16,6 +16,9 @@ if (Meteor.isClient) {
         return info.alto *5 + " pies";
       }
     },
+    files: function () {
+      return Files.find({'type': 'map-background'});
+    },
   });
 
   Template.mapList.helpers({
@@ -41,6 +44,14 @@ if (Meteor.isClient) {
     },
     shortName: function (name){
       return name.slice(0,2);
+    },
+    backgroundStyle: function (){
+      if(this.info){
+        var image = Files.findOne(this.info.mapBackground);
+        var size = "height:"+this.info.alto *75+"px; width:"+this.info.ancho *50+"px;";
+        var background = 'background-image:url("'+image.url+'");';
+        return size+background;
+      }
     },
     backgroundSize: function (){
       if(this.info){

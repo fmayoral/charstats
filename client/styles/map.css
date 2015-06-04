@@ -57,10 +57,4 @@ div.tresD {
 /*Mapas*/
 div.click-layer { z-index: 1000; }
 
-div.background-mapa { background-repeat: no-repeat; }
-
-div.background-mapa.habitacion-1 { background-image: url("img/habitacion-1-500x400.png"); }
-div.background-mapa.village-7 { background-image: url("img/village-07-500x400.jpg"); }
-div.background-mapa.swamp-1 { background-image: url("img/Swamp1_1500x1200.jpg"); }
-div.background-mapa.town-square { background-image: url("img/Town_Square_1500x1200.jpg"); }
-div.background-mapa.town-square-2 { background-image: url("img/Town_Square_2_1500x1200.jpg"); }
+div.background-mapa { background-repeat: repeat; }

@@ -1,0 +1,125 @@
+@import "scale.less";
+
+
+#canvas div.criatura{
+  background-color: transparent;
+  transform-origin: 50% 50%;
+  border: 0px solid black;
+  
+  img {
+    margin: 5px;
+  }
+
+  &.size-normal{
+    height: @char-normal; width: @char-normal;
+    img { height: @char-normal - 8 ; width: @char-normal - 8 ; -webkit-border-radius: (@char-normal - 8) /2;}
+  }
+  &.size-large{
+    height: @char-large; width: @char-large;
+    img { height: @char-large - 8; width: @char-large - 8; -webkit-border-radius: (@char-large - 8)/2;}
+  }
+  &.size-huge{
+    height: @char-huge; width: (@char-huge - 3);
+    img { height: @char-huge - 8; width: @char-huge - 8; -webkit-border-radius: (@char-huge - 8)/2;}
+  }
+  &.size-gargantuan{
+    height: @char-gargantuan; width: (@char-gargantuan - 3);
+    img { height: @char-gargantuan - 8; width: @char-gargantuan - 8; -webkit-border-radius: (@char-gargantuan - 8)/2;}
+  }
+  &.size-colossal{
+    height: @char-colossal; width: (@char-colossal - 3);
+    img { height: @char-colossal - 8; width: @char-colossal - 8; -webkit-border-radius: (@char-colossal - 8)/2;}
+  }
+
+  .flat {
+    border: 2px solid transparent;
+    width: 100%;
+    height: 100%;
+    background-color: black!important;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px black;  
+
+    text-align: center;
+    vertical-align: middle;
+    line-height: @char-normal;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform:capitalize;
+  }
+
+  &.current {
+    z-index: 10;
+    .flat {
+      background-color: #330066!important;
+      box-shadow: 0px 0px 15px #330066;  
+    }
+  }
+
+  &.non-selectable {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &.orientation-n { transform: rotateZ(0deg); }
+  &.orientation-e { transform: rotateZ(90deg); }
+  &.orientation-s { transform: rotateZ(180deg); }
+  &.orientation-w { transform: rotateZ(270deg); }
+
+  &.orientation-ne { transform: rotateZ(45deg); }
+  &.orientation-se { transform: rotateZ(135deg); }
+  &.orientation-sw { transform: rotateZ(225deg); }
+  &.orientation-nw { transform: rotateZ(315deg); }
+
+}
+
+
+/*Criaturas*/
+
+/*
+Ranger  rojo
+Warrior  purpura
+Rogue  naranja
+Clerigo amarillo
+Mago Azul
+Druida Verde
+Paladin blanco
+
+npc marron
+*/
+
+
+
+
+.tresD > div.criatura > .flat {
+/*  background: radial-gradient(black, #dddddd); */
+}
+:not(.tresD) > div.criatura > .stand-up { display:none; }
+
+div.criatura > .stand-up {
+  transform-origin: 50% 100%;
+  transform: rotateX(-90deg)!important;
+  top: -75px!important;
+  height: 100px!important;
+  border-top-left-radius:12px;
+  border-top-right-radius:12px;
+}
+
+:not(.tresD) > div.criatura.char > .flat { background-image: url("img/char-flat.png"); }
+div.criatura.char > .stand-up { background-image: url("img/char-stand-up.png"); }
+
+/*
+Render de Criaturas
+Datos necesarios:
+-Orientacion
+-char name (clase p/sprites)
+-Ubicacion en el mapa
+
+<div class="criatura orientation-sw char" style="top:350px; left:250px;">
+  <div class="flat"></div>
+  <div class="stand-up"></div>
+</div>
+
+Usar para el momento de mover piezas, para que se pueda clickear el tablero y no las piezas
+http://stackoverflow.com/questions/6300635/how-to-make-an-element-transparent-to-clicks-but-still-visible
+*/

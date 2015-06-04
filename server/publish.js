@@ -2,6 +2,10 @@ Meteor.publish('weapons', function () {
   return Weapons.find();
 });
 
+Meteor.publish('files', function () {
+  return Files.find();
+});
+
 Meteor.publish('personajes', function (user) {
   if(user){
     return Characters.find();

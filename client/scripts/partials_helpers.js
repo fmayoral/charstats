@@ -73,7 +73,7 @@ if (Meteor.isClient) {
       var pj = Session.get('active-pj');
       var response = {
         'label': 'Health',
-        'info': 'Total: '+pj.info.health.total,
+        'info': 'Damage: '+pj.info.health.damage+' Total: '+pj.info.health.total,
         'color': 'blood-red',
         'value': pj.info.health.total,
         'progress': 0
