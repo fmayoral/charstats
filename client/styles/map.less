@@ -1,0 +1,46 @@
+@import "scale.less";
+
+#canvas {
+  position: relative;
+  transition: .3s;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+div.canvas-wrapper {
+  perspective: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.tresD {
+  transform: rotatex(50deg);
+  transform-origin: 0% 20%;
+}
+
+#canvas div { 
+  position: absolute;
+  height: @cell-size;
+  width: @cell-size;
+
+  /* Estilo para evitar iconos borrosos */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+/*Mapas*/
+div.click-layer {
+  z-index: 1000;
+}
+
+div.background-mapa {
+  background-repeat: repeat;
+  background-size: 100%;
+}
+
+div.background-grid {
+  background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, transparent 2%, transparent 99%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, transparent 2%, transparent 99%);
+  background-size: @cell-size @cell-size;
+}

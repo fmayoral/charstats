@@ -1,7 +1,10 @@
 if (Meteor.isClient) {
+  //Use this for scaling maps
+  cellSize = 30;
+
+
 
   var pj = Personajes.findOne('xanxo');
-  
 
   var skills = [];
   for(var key in Habilidades.core) {
