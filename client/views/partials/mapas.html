@@ -1,78 +1,14 @@
-<template name="newmap">
-  <h2>Nuevo Mapa</h2>
-  <form class="newMapForm">
-    <div class="form-group">
-      <label for="descripcionMapa">Descripcion</label>
-      <input type="text" class="form-control" id="descripcionMapa" placeholder="Descripcion" aria-describedby="helpDescripcion">
-      <span id="helpDescripcion" class="help-block">La descripcion ayuda al momento de seleccionar un mapa de la lista</span>
-    </div>
-    <div class="form-group">
-      <label for="anchoMapa">Ancho</label>
-      <input type="number" class="form-control" id="anchoMapa" placeholder="Ancho" aria-describedby="helpAncho" min="1" value="1">
-      <span id="helpAncho" class="help-block">El ancho de su mapa sera de {{piesAncho}}</span>
-    </div>
-    <div class="form-group">
-      <label for="altoMapa">Alto</label>
-      <input type="number" class="form-control" id="altoMapa" placeholder="Alto" aria-describedby="helpAlto" min="1" value="1">
-      <span id="helpAlto" class="help-block">El ancho de su mapa sera de {{piesAlto}}</span>
-    </div>
-    <div class="form-group">
-      <label for="terrenoMapa">Terreno base</label>
-      <input type="text" class="form-control" id="terrenoMapa" placeholder="Clase del terreno">
-    </div>
-    <div class="form-group">
-      <label for="fondosRadios">Fondo de Mapa</label>
-
-      {{#each files}}
-        <div class="radio">
-          <label>
-            <input type="radio" name="fondosRadios" id="optionsRadios{{this._id}}" value="{{this._id}}">
-            {{this.file.original_name}}
-          </label>
-        </div>
-      {{/each}}
-
-    </div>
-    <button type="submit" class="btn btn-default crear-nuevo-mapa">Crear</button>
-  </form>
-    {{> mapBackgroundUpload }}
-</template>
-
-<template name="mapBackgroundUpload">
-  <br>
-  <h2>Cargar fondo</h2>
-  <div class="mapBackgroundUpload">
-    <div class="form-group">
-      <input type="file" class="form-control file_bag">
-    </div>
-    {{#each files}}
-      <div class="progress">
-        <div class="progress-bar{{#if complete}} progress-bar-success{{/if}}" role="progressbar" aria-valuenow="{{percent_uploaded}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percent_uploaded}}%;">
-          {{this.file.original_name}}<span class="sr-only">{{percent_uploaded}}% Complete</span>
-        </div>
-      </div>
-    {{else}}
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-          <span class="sr-only">0% Complete</span>
-        </div>
-      </div>
-    {{/each}}
-    <button class="btn btn-default upload">Upload</button>
-  </div>
-</template>
-
 <template name="mapList">
-  <h2>Mapas</h2>
+  <h2>Maps</h2>
     <table class="table">
 
     <thead>
       <tr>
         {{#if isInRole 'master'}}<th>Id</th>{{/if}}
-        <th>Descripcion</th>
-        <th>Ancho</th>
-        <th>Alto</th>
-        <th>Accion</th>
+        <th>Description</th>
+        <th>Width</th>
+        <th>Height</th>
+        <th>Action</th>
       </tr>
     </thead>
 
@@ -145,9 +81,10 @@
   <div class="canvas-wrapper" style="{{canvasWidth}}">
     <div id="canvas" style="{{altura}}" data-id="{{_id}}">
       <div class="background-mapa {{desc}}" style="{{backgroundStyle}}"></div>
+      <div class="background-grid" style="{{backgroundSize}}"></div>
       {{#each npcs}}
         <div class="{{estilo}} {{toLowerCase info.class}} criatura size-{{toLowerCase info.size}} {{isPjActive}}" style="{{position}}" data-id="{{_id}}" data-name="{{info.name}}">
-          <div class="flat" style="{{textCenter}}">{{shortName info.name}}</div>
+          <div class="flat">{{shortName info.name}}</div>
         </div>
       {{/each}}
       <div class="click-layer{{#if isTargeting}} hide{{/if}}" style="{{backgroundSize}}"></div>
@@ -161,3 +98,43 @@
     {{> mapaLayout}}
   </div>
 </template>
+
+<template name="mapaForm">
+  <h2>{{action}} Map</h2>
+  <form class="mapForm">
+    <div class="form-group">
+      <label for="descripcionMapa">Description</label>
+      <input type="text" class="form-control" id="descripcionMapa" placeholder="Descripcion" aria-describedby="helpDescripcion" value="{{this.info.descripcion}}">
+      <span id="helpDescripcion" class="help-block">La descripcion ayuda al momento de seleccionar un mapa de la lista</span>
+    </div>
+    <div class="form-group">
+      <label for="anchoMapa">Width</label>
+      <input type="number" class="form-control" id="anchoMapa" placeholder="Ancho" aria-describedby="helpAncho" min="1" value="{{this.info.ancho}}">
+      <span id="helpAncho" class="help-block">El ancho de su mapa sera de {{piesAncho}}</span>
+    </div>
+    <div class="form-group">
+      <label for="altoMapa">Height</label>
+      <input type="number" class="form-control" id="altoMapa" placeholder="Alto" aria-describedby="helpAlto" min="1" value="{{this.info.alto}}">
+      <span id="helpAlto" class="help-block">El ancho de su mapa sera de {{piesAlto}}</span>
+    </div>
+    <div class="form-group">
+      <label for="terrenoMapa">Base terrain</label>
+      <input type="text" class="form-control" id="terrenoMapa" placeholder="Clase del terreno" value="{{this.info.terrenoDefault}}">
+    </div>
+    <div class="form-group">
+      <label for="fondosRadios">Map Background</label>
+
+      {{#each files}}
+        <div class="radio">
+          <label>
+            <input type="radio" name="fondosRadios" id="optionsRadios{{this._id}}" value="{{this._id}}" {{checked .. }}>
+            {{this.descripcion}}
+          </label>
+        </div>
+      {{/each}}
+
+    </div>
+    <button type="submit" class="btn btn-default actualizar-mapa">Save</button>
+  </form>
+</template>
+

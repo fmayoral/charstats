@@ -61,12 +61,35 @@ Router.route('/maps', function () {
 );
 
 Router.route('/maps/new', function () {
+    Session.set('mapaInfo',{ancho:1, alto:1});
+    Session.set('action', 'new');
+  
     this.layout('sideBarContainer');
-    this.render('newmap', {});
     this.render('mastertoolbar', {to: 'sidebar'});
+    this.render('mapaForm', {});
   },
   {
     name: 'newmap'
+  }
+);
+
+Router.route('/maps/edit/:_id', function () {
+
+    var map = Mapas.findOne({_id: this.params._id});
+    Session.set('map', this.params._id);
+    Session.set('action', 'edit');
+    Session.set('mapaInfo',map.info);
+
+    this.layout('sideBarContainer');
+    this.render('mastertoolbar', {to: 'sidebar'});
+    this.render('mapaForm', {
+      data: function () {
+        return Mapas.findOne({_id: this.params._id});
+      }
+    });
+  },
+  {
+    name: 'editmap'
   }
 );
 
@@ -108,4 +131,29 @@ Router.route('/master-tools', function () {
     name: 'mastertools'
   }
 );
+
+Router.route('/dashboard', function () {
+    this.layout('sideBarContainer');
+    this.render('dashboard', {
+      data: function () { return Personajes.findOne({_id: 'xanxo'}); }
+    });
+    this.render('dashboardsidebar', {to: 'sidebar'});
+  },
+  {
+    name: 'dashboard'
+  }
+);
+
+Router.route('/files', function () {
+    this.render('archivosList', {});
+    if (Roles.userIsInRole(Meteor.user(), ['master'])) {
+      this.layout('sideBarContainer');
+      this.render('mastertoolbar', {to: 'sidebar'});
+    }
+  },
+  {
+    name: 'archivosList'
+  }
+);
+
 

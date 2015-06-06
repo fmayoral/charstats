@@ -4,3 +4,4 @@ S3.config = {
     bucket: process.env.S3_BUCKET,
     region: process.env.S3_REGION
 };
+

@@ -1,41 +1,49 @@
 if (Meteor.isClient) {
 
-  Template.newmap.events({
+  Template.mapaForm.events({
     'change #anchoMapa, keyup #anchoMapa': function (e) {
-      var info = Session.get('nuevoMapaInfo');
+      var info = Session.get('mapaInfo');
       info.ancho = $(e.target).val();
-      Session.set('nuevoMapaInfo', info);
+      Session.set('mapaInfo', info);
     },
     'change #altoMapa, keyup #altoMapa': function (e) {
-      var info = Session.get('nuevoMapaInfo');
+      var info = Session.get('mapaInfo');
       info.alto = $(e.target).val();
-      Session.set('nuevoMapaInfo', info);
+      Session.set('mapaInfo', info);
     },
-    'submit .newMapForm': function (e) {
+    'submit .mapForm': function (e) {
       var data = {};
       e.preventDefault();
-
+      
       data.ancho = $('#anchoMapa').val();
       data.alto = $('#altoMapa').val();
       data.descripcion = $('#descripcionMapa').val();
       data.terrenoDefault = $('#terrenoMapa').val();
       data.mapBackground = $('input[name=fondosRadios]:checked').val();
+      if (typeof data.mapBackground  === "undefined") { data.mapBackground = ''; }
       if(data.terrenoDefault == '') { data.terrenoDefault = 'default'; }
       
       //Como el terreno se usa como clase de CSS, debe ser lowerCase
       //@todo limpiar el string para evitar simbolos raros y espacios
       data.terrenoDefault = data.terrenoDefault.toLowerCase();
 
-      Meteor.call('createMapa',data,function(error, result){
+      switch (Session.get('action')){
+        case 'edit':
+          data._id = Session.get('map');
+          var method = 'updateMapa';
+          break;
+        case 'new':
+          var method = 'createMapa';
+          break;
+      }
+
+      Meteor.call(method,data,function(error, result){
         if (error) {
           alert(error.message);
-          //@todo desbloquear boton de crear
         } else {
-          //Redirect to id
           Router.go('mapList');
         }
       });
-      //@todo bloquear boton de crear  
     },
   });
 
@@ -54,7 +62,7 @@ if (Meteor.isClient) {
 
     'click .edit-mapa': function (event) {
       var mapId = $(event.currentTarget).closest('tr').attr('data-id');
-      //Router.go('editMapa', {_id: mapId});
+      Router.go('editmap', {_id: mapId});
     },
 
     'click .play-mapa': function (event) {
@@ -93,8 +101,8 @@ if (Meteor.isClient) {
     },
 
     'click .click-layer': function(event){
-      var cellRow = Math.floor(event.offsetY/50);
-      var cellCol = Math.floor(event.offsetX/50);
+      var cellRow = Math.floor(event.offsetY/cellSize);
+      var cellCol = Math.floor(event.offsetX/cellSize);
       var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
 
       switch(Session.get('mapAction')){
@@ -162,7 +170,5 @@ if (Meteor.isClient) {
       Session.set('alert-text', 'Seleccione una accion');
     }    
   });
-
-  
 
 }

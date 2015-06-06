@@ -14,4 +14,16 @@ Meteor.methods({
     
   },
 
+  removeFile: function(fileId){
+    var loggedInUser = Meteor.user();
+
+    if (Roles.userIsInRole(loggedInUser, ['master'])) {
+      Files.remove(fileId);
+    } else {
+      throw new Meteor.Error(403, "Not authorized to remove files");      
+    }
+  },
+
 });
+
+
