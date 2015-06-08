@@ -23,19 +23,17 @@
           <option>Sorcerer</option>
           <option>Wizard</option>
           <option>Oracle</option>
-        </select> 
+        </select>
       </div>
     </div>
     <div class="form-group">
       <label for="char-size" class="col-sm-2 control-label">Tamaño</label>
       <div class="col-sm-10">
         <select class="form-control" id="char-size">
-          <option>Normal</option>
-          <option>Large</option>
-          <option>Huge</option>
-          <option>Gargantuan</option>
-          <option>Colossal</option>
-        </select> 
+          {{#each sizes}}
+            <option value="{{this.key}}">{{this.size}}</option>
+          {{/each}}
+        </select>
       </div>
     </div>
     <div class="form-group">
@@ -54,9 +52,10 @@
       <a href="#" class="list-group-item disabled">No posee ningun personaje</a>
     {{/each}}
   </div>
-    
+
   <div class="list-group">
     <a href="#" class="list-group-item new-char"><i class="fa fa-plus"></i> Crear nuevo</a>
+    <a href="#" class="list-group-item edit-char"><i class="fa fa-pencil"></i> Editar seleccionado</a>
     <a href="#" class="list-group-item remove-char"><i class="fa fa-minus"></i> Borrar seleccionado</a>
   </div>
 </template>
