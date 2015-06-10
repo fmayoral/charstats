@@ -59,7 +59,7 @@ if (Meteor.isClient) {
       for (var i = 0; i < weapon.dadosextra.length; i++) {
         minimo += weapon.dadosextra[i].cantdado;
         maximo += weapon.dadosextra[i].cantdado*weapon.dadosextra[i].dado;
-      };
+      }
       return minimo+' - '+maximo;
     },
     criticRange: function(weapon){

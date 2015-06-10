@@ -4,9 +4,9 @@ Meteor.methods({
     var loggedInUser = Meteor.user();
     if(data.info == {}){ throw new Meteor.Error(500, "Fatal error");}
 
-    if(data.info.name == ''){ throw new Meteor.Error(500, "Debe ingresar un nombre");}
-    if(data.info.class == ''){ throw new Meteor.Error(500, "Debe elegir una clase");}
-    if(data.info.size == ''){ throw new Meteor.Error(500, "Debe elegir un tamaño");}
+    if(data.info.name === ''){ throw new Meteor.Error(500, "Debe ingresar un nombre");}
+    if(data.info.class === ''){ throw new Meteor.Error(500, "Debe elegir una clase");}
+    if(data.info.size === ''){ throw new Meteor.Error(500, "Debe elegir un tamaño");}
 
     if (Roles.userIsInRole(loggedInUser, ['master','jugador'])) {
       data.owner = loggedInUser._id;

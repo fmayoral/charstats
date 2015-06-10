@@ -2,7 +2,7 @@ if (Meteor.isClient) {
 
   Template.fileUpload.events({
     'click button.upload': function(e){
-      var files = $('input.file-bag')[0].files
+      var files = $('input.file-bag')[0].files;
       e.preventDefault();
 
       var newFile = {};
@@ -11,8 +11,8 @@ if (Meteor.isClient) {
       newFile.type = $('#file-type').val();
 
       var valid = true;
-      if(newFile.descripcion == ''){ valid = false; alert("Debe ingresar una descripcion");}
-      if(newFile.type == ''){ valid = false; alert("Debe seleccionar un tipo de archivo");}
+      if(newFile.descripcion === ''){ valid = false; alert("Debe ingresar una descripcion");}
+      if(newFile.type === ''){ valid = false; alert("Debe seleccionar un tipo de archivo");}
 
       switch(newFile.type){
         case 'map-background':
@@ -59,7 +59,7 @@ if (Meteor.isClient) {
     'click .del-archivo': function (event) {
       var fileId = $(event.currentTarget).closest('tr').attr('data-id');
       var r = confirm("Esta seguro que desea borrar el archivo?\nESTA ACCION NO SE PUEDE DESHACER");
-      if (r == true) {
+      if (r === true) {
         var archivo = Files.findOne(fileId);
         S3.delete(archivo.relative_url,
           function(error,result){
@@ -69,7 +69,7 @@ if (Meteor.isClient) {
               Meteor.call('removeFile', fileId, function(error, result){
                 if (error) {
                   alert(error.message);
-                }          
+                }
               });
             }
           }

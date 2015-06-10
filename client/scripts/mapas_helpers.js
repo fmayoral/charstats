@@ -5,13 +5,10 @@ if (Meteor.isClient) {
       switch (Session.get('action')){
         case 'edit':
           return 'Edit';
-          break;
         case 'new':
           return 'New';
-          break;
         default:
           return '';
-          break;
       }
     },
     piesAncho: function () {
@@ -109,10 +106,8 @@ if (Meteor.isClient) {
           break;
         case 'target':
           return 'Seleccionar objetivo';
-          break;
         default:
           return 'Seleccione una accion';
-          break;
       }
     },
   });

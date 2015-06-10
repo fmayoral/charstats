@@ -11,7 +11,7 @@ if (Meteor.isClient) {
       var charId = Session.get('selected_char_id');
       if(charId) {
         var r = confirm("Esta seguro que desea borrar el personaje?\nESTA ACCION NO SE PUEDE DESHACER");
-        if (r == true) {
+        if (r === true) {
           Meteor.call('removePj',charId,function(error, result){
             if (error) {
               alert(error.message);
