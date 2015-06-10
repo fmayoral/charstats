@@ -11,18 +11,9 @@
       <label for="char-class" class="col-sm-2 control-label">Clase</label>
       <div class="col-sm-10">
         <select class="form-control" id="char-class">
-          <option>Barbarian</option>
-          <option>Bard</option>
-          <option>Cleric</option>
-          <option>Druid</option>
-          <option>Fighter</option>
-          <option>Monk</option>
-          <option>Paladin</option>
-          <option>Ranger</option>
-          <option>Rogue</option>
-          <option>Sorcerer</option>
-          <option>Wizard</option>
-          <option>Oracle</option>
+          {{#each classes}}
+            <option value="{{this.key}}">{{this.name}}</option>
+          {{/each}}
         </select>
       </div>
     </div>
@@ -31,7 +22,7 @@
       <div class="col-sm-10">
         <select class="form-control" id="char-size">
           {{#each sizes}}
-            <option value="{{this.key}}">{{this.size}}</option>
+            <option value="{{this.key}}">{{this.name}}</option>
           {{/each}}
         </select>
       </div>

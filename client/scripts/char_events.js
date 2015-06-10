@@ -41,11 +41,28 @@ if (Meteor.isClient) {
       newPj.info = {};
       newPj.type = 'user'; //type = npc for monsters and characters created by masters
       newPj.position = {};
-      
+      newPj.habilidades = [];
+      newPj.weapons = [];
+
       newPj.owner = Meteor.user()._id;
       newPj.info.name = $('#char-name').val();
       newPj.info.class = $('#char-class').val();
       newPj.info.size = $('#char-size').val();
+
+
+      newPj.info.distance_target =  0;
+      newPj.info.ataque_base =  [0];
+      newPj.info.round_type =  'full';
+      newPj.info.health =  {
+          'total': 0,
+          'damage': 0,
+        };
+      newPj.info.experience = {
+          'current': 0,
+          'type': 'fast'
+        };
+      newPj.info.money = 0;
+
 
       //@todo bloquear boton de crear mientras el server procesa el request
       Meteor.call('createPj',newPj,function(error, result){

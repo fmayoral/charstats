@@ -1,4 +1,4 @@
-# charstats
+# Rolepack
 
 
 
@@ -16,12 +16,12 @@ Habilidades.[bundle_id].[habilidad_id] = {
   efectos: []
 }
 
-CharStats.efectos.[efecto_id] = function (pj, bonus) {
+Rolepack.efectos.[efecto_id] = function (pj, bonus) {
  (... modificar pj ...)
  return pj;
 }
 
-CharStats.condiciones.[condicion_id] = function (pj, value) {
+Rolepack.condiciones.[condicion_id] = function (pj, value) {
   return true/false;
 }
 ```

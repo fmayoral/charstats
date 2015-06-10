@@ -4,10 +4,10 @@ if (Meteor.isClient) {
       return Meteor.user();
     }
   });
-  
+
   Template.titulo.helpers({
     appTitle: function(){
-      return 'charStats';
+      return 'Rolepack';
     }
   });
 
@@ -40,7 +40,7 @@ if (Meteor.isClient) {
     },
     activationStatus: function(){
       var pj = Session.get('active-pj');
-      if( CharStats.funciones.aplicarEfecto(pj, Habilidades[this.bundle][this.id])){
+      if( Rolepack.funciones.aplicarEfecto(pj, Habilidades[this.bundle][this.id])){
         if (this.active) { return 'list-group-item-success';}
         if (!this.active && Habilidades[this.bundle][this.id].pasive) { return 'list-group-item-danger';}
         return '';
@@ -51,7 +51,7 @@ if (Meteor.isClient) {
 
   Template.weaponStats.helpers({
     arma: function(){
-      return CharStats.funciones.getWeaponInUse(Session.get('active-pj'));
+      return Rolepack.funciones.getWeaponInUse(Session.get('active-pj'));
     },
     damageRange: function(weapon){
       var minimo = weapon.bonificador+weapon.cantdado;
@@ -66,7 +66,7 @@ if (Meteor.isClient) {
       return weapon.criticRange[0]+' - '+weapon.criticRange[1];
     }
 
-  });  
+  });
 
   Template.dashboard.helpers({
     life: function(){

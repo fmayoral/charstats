@@ -50,19 +50,13 @@
       <h3 class="panel-title">Health</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline health-form">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <input type="number" class="form-control" id="hp-input" placeholder="Hitpoints">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <a type="button" class="btn btn-default btn-danger btn-submit-health" data-value="damage">Damage</a>
-              <a type="button" class="btn btn-default btn-success btn-submit-health" data-value="heal">Heal</a>
-            </div>
-          </div>
+      <form class="form health-form">
+        <div class="form-group">
+          <input type="number" class="form-control" id="hp-input" placeholder="Hitpoints">
+        </div>
+        <div class="form-group">
+          <a type="button" class="btn btn-default btn-danger btn-submit-health" data-value="damage">Damage</a>
+          <a type="button" class="btn btn-default btn-success btn-submit-health" data-value="heal">Heal</a>
         </div>
       </form>
     </div>
@@ -75,19 +69,13 @@
       <h3 class="panel-title">Experience</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline experience-form">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <input type="number" class="form-control" id="xp-input" placeholder="Experience">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <a type="button" class="btn btn-default btn-danger btn-submit-experience" data-value="remove">Remove</a>
-              <a type="button" class="btn btn-default btn-success btn-submit-experience" data-value="add">Add</a>
-            </div>
-          </div>
+      <form class="form experience-form">
+        <div class="form-group">
+          <input type="number" class="form-control" id="xp-input" placeholder="Experience">
+        </div>
+        <div class="form-group">
+          <a type="button" class="btn btn-default btn-danger btn-submit-experience" data-value="remove">Remove</a>
+          <a type="button" class="btn btn-default btn-success btn-submit-experience" data-value="add">Add</a>
         </div>
       </form>
     </div>
@@ -100,7 +88,7 @@
       <h3 class="panel-title">Distance to Target</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline distance-to-target">
+      <form class="form distance-to-target">
         <div class="form-group">
           <input type="number" class="form-control" id="dtt-input" placeholder="Feets">
         </div>
