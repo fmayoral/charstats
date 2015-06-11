@@ -7,24 +7,42 @@
         <input type="text" class="form-control" id="char-name" placeholder="Nombre">
       </div>
     </div>
-    <div class="form-group">
-      <label for="char-class" class="col-sm-2 control-label">Clase</label>
-      <div class="col-sm-10">
-        <select class="form-control" id="char-class">
-          {{#each classes}}
-            <option value="{{this.key}}">{{this.name}}</option>
-          {{/each}}
-        </select>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-class" class="col-sm-4 control-label">Clase</label>
+          <div class="col-sm-8">
+            <select class="form-control" id="char-class">
+              {{#each classes}}
+                <option value="{{this.key}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-size" class="col-sm-4 control-label">Tamaño</label>
+          <div class="col-sm-8">
+            <select class="form-control" id="char-size">
+              {{#each sizes}}
+                <option value="{{this.key}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="char-size" class="col-sm-2 control-label">Tamaño</label>
-      <div class="col-sm-10">
-        <select class="form-control" id="char-size">
-          {{#each sizes}}
-            <option value="{{this.key}}">{{this.name}}</option>
-          {{/each}}
-        </select>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-hitpoints" class="col-sm-4 control-label">Hitpoints</label>
+          <div class="col-sm-8">
+            <input type="number" min="0" class="form-control" id="char-hitpoints" placeholder="Hitpoints">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
       </div>
     </div>
     <div class="form-group">

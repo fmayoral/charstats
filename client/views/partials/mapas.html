@@ -84,7 +84,7 @@
       <div class="background-grid" style="{{backgroundSize}}"></div>
       {{#each npcs}}
         <div class="{{estilo}} {{toLowerCase info.class}} criatura size-{{toLowerCase info.size}} {{isPjActive}}" style="{{position}}" data-id="{{_id}}" data-name="{{info.name}}">
-          <div class="flat">{{shortName info.name}}</div>
+          <div class="flat {{healthStatus info.health}}">{{shortName info.name}}</div>
         </div>
       {{/each}}
       <div class="click-layer{{#if isTargeting}} hide{{/if}}" style="{{backgroundSize}}"></div>
@@ -137,4 +137,3 @@
     <button type="submit" class="btn btn-default actualizar-mapa">Save</button>
   </form>
 </template>
-

@@ -49,14 +49,16 @@ if (Meteor.isClient) {
       newPj.info.class = $('#char-class').val();
       newPj.info.size = $('#char-size').val();
 
+      var pjHp = $('#char-hitpoints').val();
+      newPj.info.health =  {
+          'total': parseInt(pjHp),
+          'damage': 0,
+        };
+
 
       newPj.info.distance_target =  0;
       newPj.info.ataque_base =  [0];
       newPj.info.round_type =  'full';
-      newPj.info.health =  {
-          'total': 0,
-          'damage': 0,
-        };
       newPj.info.experience = {
           'current': 0,
           'type': 'fast'

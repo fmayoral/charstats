@@ -53,6 +53,20 @@ if (Meteor.isClient) {
     shortName: function (name){
       return name.slice(0,2);
     },
+    healthStatus: function(health){
+      var status = '';
+      if(health.total !== 0){
+        var percentage = Math.floor((health.damage / health.total) * 100);
+        if (percentage > 50) {
+          status = 'half-dead';
+        }
+        if (percentage > 75) {
+          status = 'almost-dead';
+        }
+        console.log(percentage);
+      }
+      return status;
+    },
     backgroundStyle: function (){
       if(this.info){
         var image = Files.findOne(this.info.mapBackground);
