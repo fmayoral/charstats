@@ -88,7 +88,7 @@
     border: 2px solid transparent;
     width: 100%;
     height: 100%;
-    background-color: black;
+    background: black;
     border-radius: 50%;
     box-shadow: 0px 0px 15px black;
 
@@ -97,12 +97,34 @@
     color: white;
     font-weight: bold;
     text-transform:capitalize;
-    &.half-dead {
-      background-color: #800000;
+    transition: background 1s;
+
+    .injuries-no-show (@i) when (@i < 10) {
+      &[data-injuries="@{i}"] {
+        background: radial-gradient(#440000 0%, black 0%);
+      }
+      .injuries-no-show(@i + 1);
     }
-    &.almost-dead {
-      background-color: #cc0000;
+    .injuries-no-show(0);
+
+    @incrementA: 15% / 80;
+    @incrementB: 1%;
+    .injuries-progression (@i) when (@i < 90) {
+      &[data-injuries="@{i}"] {
+        background: radial-gradient(#440000 @incrementA * @i, black @incrementB * @i);
+      }
+      .injuries-progression(@i + 1);
     }
+    .injuries-progression(10);
+
+    .injuries-maxed (@i) when (@i <= 100) {
+      &[data-injuries="@{i}"] {
+        background: radial-gradient(#440000 30%, black 130%);
+      }
+      .injuries-maxed(@i + 1);
+    }
+    .injuries-maxed(90);
+
   }
 
   &.current {
