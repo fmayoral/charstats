@@ -35,7 +35,7 @@ Meteor.methods({
     var mapId = data._id;
     delete data._id;
 
-    if(data.alto<1 || data.alto>75 || data.ancho<1 || data.ancho>75) {
+    if(data.alto<1 || data.alto>150 || data.ancho<1 || data.ancho>150) {
       throw new Meteor.Error(403, "Wrong size");
     }
     if(data.descripcion === "") { throw new Meteor.Error(403, "Empty description"); }
