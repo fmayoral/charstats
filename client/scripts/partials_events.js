@@ -19,7 +19,7 @@ if (Meteor.isClient) {
   Template.habilidades.events({
     'click .toggle-feat': function (e) {
       e.preventDefault();
-      Rolepack.funciones.toggleFeat(this.id);
+      Rolepack.funciones.toggleFeat(this.key);
     }
   });
 }
