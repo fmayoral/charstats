@@ -10,15 +10,16 @@ if (Meteor.isClient) {
   Template.inventario.events({
     'click .weapon-btn': function (e) {
       e.preventDefault();
-      CharStats.funciones.setActiveWeapon(this._id);
-      CharStats.funciones.updateCharStats();
+      Rolepack.funciones.setActiveWeapon(this._id);
+      /*@todo pasar pj a la funcion*/
+      Rolepack.funciones.updateRolepack();
     }
   });
 
   Template.habilidades.events({
     'click .toggle-feat': function (e) {
       e.preventDefault();
-      CharStats.funciones.toggleFeat(this.id);
+      Rolepack.funciones.toggleFeat(this.id);
     }
-  });  
+  });
 }

@@ -108,3 +108,11 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.75em;
 }
+
+/*
+ * Helpers
+ */
+
+select {
+  text-transform: capitalize;
+}

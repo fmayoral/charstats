@@ -4,9 +4,9 @@ Meteor.methods({
     var loggedInUser = Meteor.user();
     if(data.info == {}){ throw new Meteor.Error(500, "Fatal error");}
 
-    if(data.info.name == ''){ throw new Meteor.Error(500, "Debe ingresar un nombre");}
-    if(data.info.class == ''){ throw new Meteor.Error(500, "Debe elegir una clase");}
-    if(data.info.size == ''){ throw new Meteor.Error(500, "Debe elegir un tamaño");}
+    if(data.info.name === ''){ throw new Meteor.Error(500, "Debe ingresar un nombre");}
+    if(data.info.class === ''){ throw new Meteor.Error(500, "Debe elegir una clase");}
+    if(data.info.size === ''){ throw new Meteor.Error(500, "Debe elegir un tamaño");}
 
     if (Roles.userIsInRole(loggedInUser, ['master','jugador'])) {
       data.owner = loggedInUser._id;
@@ -14,7 +14,7 @@ Meteor.methods({
       var newId = Characters.insert(data);
       return {id: newId};
     } else {
-      throw new Meteor.Error(403, "Not authorized to create characters");      
+      throw new Meteor.Error(403, "Not authorized to create characters");
     }
   },
   removePj: function(charId){
@@ -24,7 +24,7 @@ Meteor.methods({
     if(pj.owner == Meteor.user()._id){
       Characters.remove(charId);
     } else {
-      throw new Meteor.Error(403, "Not authorized to create characters");      
+      throw new Meteor.Error(403, "Not authorized to create characters");
     }
   },
   setCharPosition: function(charId, row, col, mapId){
@@ -43,5 +43,18 @@ Meteor.methods({
       throw new Meteor.Error(403, "Not authorized to move this character");
     }
   },
+  updatePj: function(pj){
+    var loggedInUser = Meteor.user();
+    if(pj.info == {}){ throw new Meteor.Error(500, "Fatal error");}
+
+    if (pj.owner == loggedInUser._id) {
+
+      var result = Characters.update(pj._id, pj);
+      return result;
+    } else {
+      throw new Meteor.Error(403, "Not authorized to update this character");
+    }
+
+  }
 
 });

@@ -9,5 +9,22 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.charNew.helpers({
+    sizes: function (){
+      var response = [];
+      var keys = Object.keys(Tablas.core.charSize);
+      for (var i = 0; i < keys.length; i++) {
+        response.push(Tablas.core.charSize[keys[i]]);
+      }
+      return response;
+    },
+    classes: function (){
+      var response = [];
+      var keys = Object.keys(Tablas.core.classes);
+      for (var i = 0; i < keys.length; i++) {
+        response.push(Tablas.core.classes[keys[i]]);
+      }
+      return response;
+    }
+  });
 }
-

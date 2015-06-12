@@ -16,8 +16,11 @@ var mustBeSignedIn = function(){
 Router.onBeforeAction(mustBeSignedIn, {except: ['login']});
 
 Router.onBeforeAction(function() {
-  Session.set('active-pj', Personajes.findOne({'_id': Session.get('charName')}));
-  CharStats.funciones.updateCharStats();
+  //Session.set('active-pj', Personajes.findOne({'_id': Session.get('charName')}));
+  var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+  if(pj){
+    Rolepack.funciones.updateRolepack(pj);
+  }
   this.next();
 }, {only: ['dashboard']});
 
@@ -61,12 +64,35 @@ Router.route('/maps', function () {
 );
 
 Router.route('/maps/new', function () {
+    Session.set('mapaInfo',{ancho:1, alto:1});
+    Session.set('action', 'new');
+
     this.layout('sideBarContainer');
-    this.render('newmap', {});
     this.render('mastertoolbar', {to: 'sidebar'});
+    this.render('mapaForm', {});
   },
   {
     name: 'newmap'
+  }
+);
+
+Router.route('/maps/edit/:_id', function () {
+
+    var map = Mapas.findOne({_id: this.params._id});
+    Session.set('map', this.params._id);
+    Session.set('action', 'edit');
+    Session.set('mapaInfo',map.info);
+
+    this.layout('sideBarContainer');
+    this.render('mastertoolbar', {to: 'sidebar'});
+    this.render('mapaForm', {
+      data: function () {
+        return Mapas.findOne({_id: this.params._id});
+      }
+    });
+  },
+  {
+    name: 'editmap'
   }
 );
 
@@ -109,3 +135,33 @@ Router.route('/master-tools', function () {
   }
 );
 
+Router.route('/dashboard', function () {
+    if(Session.get('active-pj')){
+      this.layout('sideBarContainer');
+      this.render('dashboard', {
+        data: function () {
+          return Session.get('active-pj');
+        }
+      });
+      this.render('dashboardsidebar', {to: 'sidebar'});
+    } else {
+      Router.go('home');
+    }
+
+  },
+  {
+    name: 'dashboard'
+  }
+);
+
+Router.route('/files', function () {
+    this.render('archivosList', {});
+    if (Roles.userIsInRole(Meteor.user(), ['master'])) {
+      this.layout('sideBarContainer');
+      this.render('mastertoolbar', {to: 'sidebar'});
+    }
+  },
+  {
+    name: 'archivosList'
+  }
+);
