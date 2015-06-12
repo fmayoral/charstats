@@ -13,21 +13,13 @@ Meteor.publish('personajes', function (user) {
   return;
 });
 
-Meteor.publish('mapas', function(userId, mapId){
+Meteor.publish('mapas', function(userId){
   if (Roles.userIsInRole(userId, ['jugador', 'master'])){
-    if(mapId){
-      return Mapas.find({'_id': mapId});
-    } else {
-      return Mapas.find({},{
-            fields: {
-              '_id': 1,
-              'info': 1
-            },
-            sort: {
-              'info.descripcion':1
-            }
-          });
-    }
+    return Mapas.find({},{
+          sort: {
+            'info.descripcion':1
+          }
+        });
   }
   return;
 });
