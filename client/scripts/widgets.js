@@ -29,7 +29,7 @@ if (Meteor.isClient) {
           if (error) {
             alert(error.message);
           } else {
-            Rolepack.funciones.updateRolepack(pj);
+            Rolepack.funciones.updateCharForDisplay(pj);
             $('#dtt-input').val('');
           }
         });
@@ -53,7 +53,7 @@ if (Meteor.isClient) {
           if (error) {
             alert(error.message);
           } else {
-            Rolepack.funciones.updateRolepack(pj);
+            Rolepack.funciones.updateCharForDisplay(pj);
             $('#hp-input').val('');
           }
         });
@@ -77,7 +77,7 @@ if (Meteor.isClient) {
           if (error) {
             alert(error.message);
           } else {
-            Rolepack.funciones.updateRolepack(pj);
+            Rolepack.funciones.updateCharForDisplay(pj);
             $('#xp-input').val('');
           }
         });
@@ -96,7 +96,7 @@ if (Meteor.isClient) {
         if (error) {
           alert(error.message);
         } else {
-          Rolepack.funciones.updateRolepack(pj);
+          Rolepack.funciones.updateCharForDisplay(pj);
         }
       });
     }
