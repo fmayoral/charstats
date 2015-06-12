@@ -12,7 +12,7 @@ if (Meteor.isClient) {
       e.preventDefault();
       Rolepack.funciones.setActiveWeapon(this._id);
       /*@todo pasar pj a la funcion*/
-      Rolepack.funciones.updateRolepack();
+      Rolepack.funciones.updateCharForDisplay();
     }
   });
 
