@@ -57,6 +57,7 @@ if (Meteor.isClient) {
       var percentage = 0;
       if(health.total !== 0){
         percentage = Math.floor((health.damage / health.total) * 100);
+        if(percentage>100) { percentage=100; }
       }
       return percentage;
     },
