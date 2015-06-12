@@ -36,13 +36,13 @@ if (Meteor.isClient) {
       return pj.habilidades;
     },
     habilidad: function(){
-      return Habilidades[this.bundle][this.id];
+      return Habilidades[this.bundle][this.key];
     },
     activationStatus: function(){
       var pj = Session.get('active-pj');
-      if( Rolepack.funciones.aplicarEfecto(pj, Habilidades[this.bundle][this.id])){
+      if( Rolepack.funciones.aplicarEfecto(pj, Habilidades[this.bundle][this.key])){
         if (this.active) { return 'list-group-item-success';}
-        if (!this.active && Habilidades[this.bundle][this.id].pasive) { return 'list-group-item-danger';}
+        if (!this.active && Habilidades[this.bundle][this.key].pasive) { return 'list-group-item-danger';}
         return '';
       }
       return 'disabled';
