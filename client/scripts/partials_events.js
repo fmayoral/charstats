@@ -26,7 +26,6 @@ if (Meteor.isClient) {
   Template.habilidades.events({
     'click .toggle-feat': function (e) {
       e.preventDefault();
-      Rolepack.funciones.toggleFeat(this.key);
       var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
       pj = Rolepack.funciones.toggleFeat(pj, this.key);
       Meteor.call('updatePj',pj,function(error, result){
