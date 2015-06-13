@@ -40,7 +40,7 @@ if (Meteor.isClient) {
     },
     activationStatus: function(){
       var pj = Session.get('active-pj');
-      if( Rolepack.funciones.aplicarEfecto(pj, Habilidades[this.bundle][this.key])){
+      if( Rolepack.funciones.verificarCondiciones(pj, Habilidades[this.bundle][this.key])){
         if (this.active) { return 'list-group-item-success';}
         if (!this.active && Habilidades[this.bundle][this.key].pasive) { return 'list-group-item-danger';}
         return '';
@@ -87,7 +87,7 @@ if (Meteor.isClient) {
       var pj = Session.get('active-pj');
       var response = {
         'label': 'Level: '+pj.info.experience.level,
-        'info': 'Next Level: '+pj.info.experience.next_lvl,
+        'info': 'Next Level at: '+pj.info.experience.next_lvl,
         'color': 'experience-green',
         'value': pj.info.experience.current,
         'progress': 0
