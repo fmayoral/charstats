@@ -112,7 +112,7 @@ Setea el tipo de round indicado en `roundType`
 
 ---
 ```javascript
-Rolepack.funciones.updateCharForDisplay = function (pj)
+Rolepack.funciones.modifyCharForDisplay = function (pj)
 ```
 **return** (pj modificado)
 

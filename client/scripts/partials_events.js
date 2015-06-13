@@ -16,7 +16,7 @@ if (Meteor.isClient) {
         if (error) {
           alert(error.message);
         } else {
-          Rolepack.funciones.updateCharForDisplay(pj);
+          Rolepack.funciones.modifyCharForDisplay(pj);
         }
       });
 
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
         if (error) {
           alert(error.message);
         } else {
-          Rolepack.funciones.updateCharForDisplay(pj);
+          Rolepack.funciones.modifyCharForDisplay(pj);
           $('#dtt-input').val('');
         }
       });

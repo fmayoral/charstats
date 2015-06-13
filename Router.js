@@ -19,7 +19,7 @@ Router.onBeforeAction(function() {
   //Session.set('active-pj', Personajes.findOne({'_id': Session.get('charName')}));
   var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
   if(pj){
-    Rolepack.funciones.updateCharForDisplay(pj);
+    Rolepack.funciones.modifyCharForDisplay(pj);
   }
   this.next();
 }, {only: ['dashboard']});
