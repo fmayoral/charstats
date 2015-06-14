@@ -4,10 +4,10 @@ if (Meteor.isClient) {
       return Meteor.user();
     }
   });
-  
+
   Template.titulo.helpers({
     appTitle: function(){
-      return 'charStats';
+      return 'Rolepack';
     }
   });
 
@@ -31,18 +31,30 @@ if (Meteor.isClient) {
   });
 
   Template.habilidades.helpers({
-    habilidades: function(){
+    bundles: function(){
       var pj = Session.get('active-pj');
-      return pj.habilidades;
+      return _.map(_.groupBy(pj.habilidades, function(hab) { return hab.bundle; }), function(val,key){return {key: key, habilidades: val};});
     },
-    habilidad: function(){
-      return Habilidades[this.bundle][this.id];
+    descripcion_bundle: function(){
+      return Habilidades[this.key].info;
+    },
+    nombre_bundle: function(){
+      return Habilidades[this.key].name;
+    },
+    habilidades: function(habList){
+      var responseList = [];
+      for (var i = 0; i < habList.length; i++) {
+        var habilidad = Habilidades[habList[i].bundle][habList[i].key];
+        habilidad.active = habList[i].active;
+        responseList.push(habilidad);
+      }
+      return _.sortBy(responseList, function(o){ return [o.pasive, o.name]; });
     },
     activationStatus: function(){
       var pj = Session.get('active-pj');
-      if( CharStats.funciones.aplicarEfecto(pj, Habilidades[this.bundle][this.id])){
+      if( Rolepack.funciones.verificarCondiciones(pj, this)){
         if (this.active) { return 'list-group-item-success';}
-        if (!this.active && Habilidades[this.bundle][this.id].pasive) { return 'list-group-item-danger';}
+        if (!this.active && this.pasive) { return 'list-group-item-danger';}
         return '';
       }
       return 'disabled';
@@ -51,7 +63,7 @@ if (Meteor.isClient) {
 
   Template.weaponStats.helpers({
     arma: function(){
-      return CharStats.funciones.getWeaponInUse(Session.get('active-pj'));
+      return Rolepack.funciones.getWeaponInUse(Session.get('active-pj'));
     },
     damageRange: function(weapon){
       var minimo = weapon.bonificador+weapon.cantdado;
@@ -59,21 +71,21 @@ if (Meteor.isClient) {
       for (var i = 0; i < weapon.dadosextra.length; i++) {
         minimo += weapon.dadosextra[i].cantdado;
         maximo += weapon.dadosextra[i].cantdado*weapon.dadosextra[i].dado;
-      };
+      }
       return minimo+' - '+maximo;
     },
     criticRange: function(weapon){
       return weapon.criticRange[0]+' - '+weapon.criticRange[1];
     }
 
-  });  
+  });
 
   Template.dashboard.helpers({
     life: function(){
       var pj = Session.get('active-pj');
       var response = {
         'label': 'Health',
-        'info': 'Total: '+pj.info.health.total,
+        'info': 'Damage: '+pj.info.health.damage+' Total: '+pj.info.health.total,
         'color': 'blood-red',
         'value': pj.info.health.total,
         'progress': 0
@@ -87,7 +99,7 @@ if (Meteor.isClient) {
       var pj = Session.get('active-pj');
       var response = {
         'label': 'Level: '+pj.info.experience.level,
-        'info': 'Next Level: '+pj.info.experience.next_lvl,
+        'info': 'Next Level at: '+pj.info.experience.next_lvl,
         'color': 'experience-green',
         'value': pj.info.experience.current,
         'progress': 0

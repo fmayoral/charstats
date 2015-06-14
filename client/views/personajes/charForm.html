@@ -1,0 +1,64 @@
+<template name="charForm">
+  <h2>{{action}} Character</h2>
+  <form class="form-horizontal form-char">
+    <div class="form-group">
+      <label for="char-name" class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="char-name" placeholder="Name" value="{{this.info.name}}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-class" class="col-sm-4 control-label">Class</label>
+          <div class="col-sm-8">
+            <select class="form-control" id="char-class">
+              {{#each classes}}
+                <option value="{{this.key}}" {{selectedClass ..}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-size" class="col-sm-4 control-label">Size</label>
+          <div class="col-sm-8">
+            <select class="form-control" id="char-size">
+              {{#each sizes}}
+                <option value="{{this.key}}" {{selectedSize ..}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-hitpoints" class="col-sm-4 control-label">Hitpoints</label>
+          <div class="col-sm-8">
+            <input type="number" min="0" class="form-control" id="char-hitpoints" placeholder="Hitpoints" value="{{this.info.health.total}}">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-hitpoints" class="col-sm-4 control-label">Experience Type</label>
+          <div class="col-sm-8">
+            <select class="form-control" id="char-experience-size">
+              {{#each experiences}}
+                <option value="{{this}}" {{selectedXpType ..}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Save</button>
+      </div>
+    </div>
+  </form>
+</template>

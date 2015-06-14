@@ -9,14 +9,17 @@ if (Meteor.isClient) {
         case 'home':
           Router.go('home');
           break;
-        case 'playMap':
-          Router.go('playMap');
+        case 'playmemorymap':
+          Router.go('playmemorymap');
           break;
         case 'mastertools':
           Router.go('mastertools');
           break;
         case 'logout':
-          Meteor.logout();
+          var r = confirm("Esta seguro que desea salir?");
+          if (r === true) {
+            Meteor.logout();
+          }
           break;
       }
     }

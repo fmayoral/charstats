@@ -1,19 +1,34 @@
 if (Meteor.isClient) {
-  Template.newmap.rendered = function (){
-    Session.set('nuevoMapaInfo',{ancho:1, alto:1, tipo: 'pasto'});
-  };
 
-  Template.newmap.helpers({
+  Template.mapaForm.helpers({
+    action: function () {
+      switch (Session.get('action')){
+        case 'edit':
+          return 'Edit';
+        case 'new':
+          return 'New';
+        default:
+          return '';
+      }
+    },
     piesAncho: function () {
-      var info = Session.get('nuevoMapaInfo');
+      var info = Session.get('mapaInfo');
       if (typeof info != 'undefined'){
-        return info.ancho *5 + " pies";
+        return info.ancho *5 + " feets";
       }
     },
     piesAlto: function () {
-      var info = Session.get('nuevoMapaInfo');
+      var info = Session.get('mapaInfo');
       if (typeof info != 'undefined'){
-        return info.alto *5 + " pies";
+        return info.alto *5 + " feets";
+      }
+    },
+    files: function () {
+      return Files.find({'type': 'map-background'},{'sort':{'descripcion':1}});
+    },
+    checked: function (parent) {
+      if(this && parent && this._id == parent.info.mapBackground) {
+        return 'checked';
       }
     },
   });
@@ -27,17 +42,42 @@ if (Meteor.isClient) {
   Template.mapaLayout.helpers({
     altura: function (){
       if(this.info){
-        var altura = "height:"+this.info.alto *50+"px;";
+        var altura = "height:"+this.info.alto *cellSize+"px;";
         return altura;
       }
     },
     position: function (){
-      var pos = "top:"+this.index.r *50+"px; left:"+this.index.c *50+"px;";
+      var pos = "top:"+this.position.index.r *cellSize+"px; left:"+this.position.index.c *cellSize+"px;";
       return pos;
+    },
+    shortName: function (name){
+      return name.slice(0,2);
+    },
+    healthStatus: function(health){
+      var percentage = 0;
+      if(health.total !== 0){
+        percentage = Math.floor((health.damage / health.total) * 100);
+        if(percentage>100) { percentage=100; }
+      }
+      return percentage;
+    },
+    backgroundStyle: function (){
+      if(this.info){
+        var image = Files.findOne(this.info.mapBackground);
+        var canvasSize = "height:"+this.info.alto *cellSize+"px; width:"+this.info.ancho *cellSize+"px;";
+        var background = 'background-image:url("'+image.url+'");';
+        return canvasSize+background;
+      }
     },
     backgroundSize: function (){
       if(this.info){
-        var size = "height:"+this.info.alto *50+"px; width:"+this.info.ancho *50+"px;";
+        var size = "height:"+this.info.alto *cellSize+"px; width:"+this.info.ancho *cellSize+"px;";
+        return size;
+      }
+    },
+    canvasWidth: function (){
+      if(this.info){
+        var size = "width:"+this.info.ancho *cellSize+"px;";
         return size;
       }
     },
@@ -47,11 +87,36 @@ if (Meteor.isClient) {
         return description;
       }
     },
-    criaturas: function (){
-      if(Session.get('action') == 'play') {
-        //return Criaturas.find({'map': Session.get('map'), 'positionSet':true});
+    npcs: function (){
+      return Characters.find({'position.map': Session.get('map')});
+    },
+    isAction: function(command){
+      if(Session.get('mapAction') == command) {
+        return 'active';
       }
-      return null;
+    },
+    isPjActive: function(){
+      if(Session.get('selected_char_id') == this._id) {
+        return 'current';
+      }
+    },
+    isTargeting: function(){
+      return Session.get('mapAction') == 'target';
+    },
+    actionTextHelper: function(){
+      switch(Session.get('mapAction')){
+        case 'play':
+          if (Session.get('selected_char_id')) {
+            return 'Ubicar personaje';
+          } else {
+            return 'Seleccione un personaje';
+          }
+          break;
+        case 'target':
+          return 'Seleccionar objetivo';
+        default:
+          return 'Seleccione una accion';
+      }
     },
   });
 

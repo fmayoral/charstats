@@ -3,15 +3,15 @@ if (!(typeof MochaWeb === 'undefined')){
     describe("Efecto - Extra Attack", function(){
       it("should give (n) extra attack", function(){
         var attackRequest = [2,3];
-        var attackResponse = CharStats.efectos.ataque_extra({'ataques':attackRequest}, 2);
+        var attackResponse = Rolepack.efectos.ataque_extra({'ataques':attackRequest}, 2);
         chai.assert.equal(attackResponse.ataques.length, 4);
 
         var attackRequest = [2];
-        var attackResponse = CharStats.efectos.ataque_extra({'ataques':attackRequest}, 1);
+        var attackResponse = Rolepack.efectos.ataque_extra({'ataques':attackRequest}, 1);
         chai.assert.equal(attackResponse.ataques.length, 2);
 
         var attackRequest = [2,3];
-        var attackResponse = CharStats.efectos.ataque_extra({'ataques':attackRequest}, 5);
+        var attackResponse = Rolepack.efectos.ataque_extra({'ataques':attackRequest}, 5);
         chai.assert.equal(attackResponse.ataques.length, 7);
       });
     });
@@ -21,15 +21,15 @@ if (!(typeof MochaWeb === 'undefined')){
     describe("Efecto - Modifica Bonus de Ataque", function(){
       it("should give (n) bonus to all attacks", function(){
         var attackRequest = [2, 3];
-        var attackResponse = CharStats.efectos.ataque({'ataques':attackRequest}, 2);
+        var attackResponse = Rolepack.efectos.ataque({'ataques':attackRequest}, 2);
         chai.assert.deepEqual(attackResponse.ataques, [4, 5]);
 
         var attackRequest = [2];
-        var attackResponse = CharStats.efectos.ataque({'ataques':attackRequest}, 1);
+        var attackResponse = Rolepack.efectos.ataque({'ataques':attackRequest}, 1);
         chai.assert.deepEqual(attackResponse.ataques, [3]);
 
         var attackRequest = [2, 3];
-        var attackResponse = CharStats.efectos.ataque({'ataques':attackRequest}, -1);
+        var attackResponse = Rolepack.efectos.ataque({'ataques':attackRequest}, -1);
         chai.assert.deepEqual(attackResponse.ataques, [1, 2]);
       });
     });
@@ -40,18 +40,18 @@ if (!(typeof MochaWeb === 'undefined')){
       it("should give (n) bonus to all damages", function(){
         var weaponRequest =[{'otro_atributo': false,'bonificador': 2 },{'otro_atributo': false,'bonificador': 0 }];
         var weaponExpectedResponse =[{'otro_atributo': false,'bonificador': 4 },{'otro_atributo': false,'bonificador': 2 }];
-        var weaponResponse = CharStats.efectos.danio_bonificador({'weapons':weaponRequest}, 2);
+        var weaponResponse = Rolepack.efectos.danio_bonificador({'weapons':weaponRequest}, 2);
         chai.assert.deepEqual(weaponResponse.weapons, weaponExpectedResponse);
 
 
         var weaponRequest =[{'otro_atributo': false,'bonificador': 1 }];
         var weaponExpectedResponse =[{'otro_atributo': false,'bonificador': 2 }];
-        var weaponResponse = CharStats.efectos.danio_bonificador({'weapons':weaponRequest}, 1);
+        var weaponResponse = Rolepack.efectos.danio_bonificador({'weapons':weaponRequest}, 1);
         chai.assert.deepEqual(weaponResponse.weapons, weaponExpectedResponse);
 
         var weaponRequest =[{'otro_atributo': false,'bonificador': 0 },{'otro_atributo': false,'bonificador': 2 }];
         var weaponExpectedResponse =[{'otro_atributo': false,'bonificador': -1 },{'otro_atributo': false,'bonificador': 1 }];
-        var weaponResponse = CharStats.efectos.danio_bonificador({'weapons':weaponRequest}, -1);
+        var weaponResponse = Rolepack.efectos.danio_bonificador({'weapons':weaponRequest}, -1);
         chai.assert.deepEqual(weaponResponse.weapons, weaponExpectedResponse);
       });
     });

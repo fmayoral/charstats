@@ -1,0 +1,38 @@
+<template name="mapaForm">
+  <h2>{{action}} Map</h2>
+  <form class="mapForm">
+    <div class="form-group">
+      <label for="descripcionMapa">Description</label>
+      <input type="text" class="form-control" id="descripcionMapa" placeholder="Descripcion" aria-describedby="helpDescripcion" value="{{this.info.descripcion}}">
+      <span id="helpDescripcion" class="help-block">La descripcion ayuda al momento de seleccionar un mapa de la lista</span>
+    </div>
+    <div class="form-group">
+      <label for="anchoMapa">Width</label>
+      <input type="number" class="form-control" id="anchoMapa" placeholder="Ancho" aria-describedby="helpAncho" min="1" value="{{this.info.ancho}}">
+      <span id="helpAncho" class="help-block">El ancho de su mapa sera de {{piesAncho}}</span>
+    </div>
+    <div class="form-group">
+      <label for="altoMapa">Height</label>
+      <input type="number" class="form-control" id="altoMapa" placeholder="Alto" aria-describedby="helpAlto" min="1" value="{{this.info.alto}}">
+      <span id="helpAlto" class="help-block">El ancho de su mapa sera de {{piesAlto}}</span>
+    </div>
+    <div class="form-group">
+      <label for="terrenoMapa">Base terrain</label>
+      <input type="text" class="form-control" id="terrenoMapa" placeholder="Clase del terreno" value="{{this.info.terrenoDefault}}">
+    </div>
+    <div class="form-group">
+      <label for="fondosRadios">Map Background</label>
+
+      {{#each files}}
+        <div class="radio">
+          <label>
+            <input type="radio" name="fondosRadios" id="optionsRadios{{this._id}}" value="{{this._id}}" {{checked .. }}>
+            {{this.descripcion}}
+          </label>
+        </div>
+      {{/each}}
+
+    </div>
+    <button type="submit" class="btn btn-default actualizar-mapa">Save</button>
+  </form>
+</template>

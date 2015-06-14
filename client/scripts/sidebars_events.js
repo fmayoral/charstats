@@ -15,6 +15,9 @@ if (Meteor.isClient) {
         case 'listnpc':
           Router.go('npcList');
           break;
+        case 'archivos':
+          Router.go('archivosList');
+          break;
       }
     }
   });

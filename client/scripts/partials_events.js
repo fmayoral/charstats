@@ -10,15 +10,33 @@ if (Meteor.isClient) {
   Template.inventario.events({
     'click .weapon-btn': function (e) {
       e.preventDefault();
-      CharStats.funciones.setActiveWeapon(this._id);
-      CharStats.funciones.updateCharStats();
+      var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+      pj = Rolepack.funciones.setActiveWeapon(pj, this._id);
+      Meteor.call('updatePj',pj,function(error, result){
+        if (error) {
+          alert(error.message);
+        } else {
+          Rolepack.funciones.modifyCharForDisplay(pj);
+        }
+      });
+
     }
   });
 
   Template.habilidades.events({
     'click .toggle-feat': function (e) {
       e.preventDefault();
-      CharStats.funciones.toggleFeat(this.id);
+      var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+      pj = Rolepack.funciones.toggleFeat(pj, this.key);
+      Meteor.call('updatePj',pj,function(error, result){
+        if (error) {
+          alert(error.message);
+        } else {
+          Rolepack.funciones.modifyCharForDisplay(pj);
+          $('#dtt-input').val('');
+        }
+      });
+
     }
-  });  
+  });
 }
