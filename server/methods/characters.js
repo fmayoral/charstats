@@ -50,7 +50,7 @@ Meteor.methods({
     if (pj.owner == loggedInUser._id) {
 
       var result = Characters.update(pj._id, pj);
-      return result;
+      return result>0?{id: pj._id}:null;
     } else {
       throw new Meteor.Error(403, "Not authorized to update this character");
     }

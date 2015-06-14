@@ -43,10 +43,27 @@ Router.route('/login', function () {
 );
 
 Router.route('/char/new', function () {
-    this.render('charNew', {});
+    Session.set('selected_char_id', null);
+    Session.set('action', 'new');
+    this.render('charForm', {});
   },
   {
     name: 'newChar'
+  }
+);
+
+Router.route('/char/edit/:_id', function () {
+    var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+    Session.set('action', 'edit');
+
+    this.render('charForm', {
+      data: function () {
+        return pj;
+      }
+    });
+  },
+  {
+    name: 'editChar'
   }
 );
 
