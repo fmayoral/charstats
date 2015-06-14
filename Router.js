@@ -53,12 +53,20 @@ Router.route('/char/new', function () {
 );
 
 Router.route('/char/edit/:_id', function () {
-    var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+    var modificadores = {
+      'str': 0,
+      'dex': 0,
+      'con': 0,
+      'int': 0,
+      'wis': 0,
+      'cha': 0,
+    };
     Session.set('action', 'edit');
+    Session.set('char-attr-list', modificadores);
 
     this.render('charForm', {
       data: function () {
-        return pj;
+        return Characters.findOne({'_id': Session.get('selected_char_id')});
       }
     });
   },

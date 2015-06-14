@@ -9,6 +9,28 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.charForm.onRendered(function () {
+    var modificadores = {
+      'str': Tablas.core.abilities.getModificador(this.data?this.data.info.atributos.str:10),
+      'dex': Tablas.core.abilities.getModificador(this.data?this.data.info.atributos.dex:10),
+      'con': Tablas.core.abilities.getModificador(this.data?this.data.info.atributos.con:10),
+      'int': Tablas.core.abilities.getModificador(this.data?this.data.info.atributos.int:10),
+      'wis': Tablas.core.abilities.getModificador(this.data?this.data.info.atributos.wis:10),
+      'cha': Tablas.core.abilities.getModificador(this.data?this.data.info.atributos.cha:10),
+    };
+    Session.set('char-attr-list', modificadores);
+  });
+
+  Template.charAttrib.helpers({
+    value: function(){
+      return this.parent?this.parent.info.atributos[this.attrib]:0;
+    },
+    modificador: function(){
+      var modificadores = Session.get('char-attr-list');
+      return modificadores?modificadores[this.attrib]:'';
+    },
+  });
+
   Template.charForm.helpers({
     action: function () {
       switch (Session.get('action')){
@@ -19,6 +41,9 @@ if (Meteor.isClient) {
         default:
           return '';
       }
+    },
+    atribList: function(){
+      return ['str','dex','con','int','wis','cha'];
     },
     selectedClass: function (parent) {
       if(this && parent && this.key == parent.info.class) {

@@ -1,5 +1,16 @@
 if (Meteor.isClient) {
 
+  Template.charAttrib.events({
+    'change .attrib-input, keyup .attrib-input': function (e) {
+      var value = parseInt($(e.target).val());
+      var attrib = $(e.target).attr('data-attr');
+      var modificadores = Session.get('char-attr-list');
+      modificadores[attrib] = Tablas.core.abilities.getModificador(value);
+      Session.set('char-attr-list', modificadores);
+    },
+
+  });
+
   Template.charList.events({
     'click .new-char': function (e) {
       e.preventDefault();
@@ -74,6 +85,14 @@ if (Meteor.isClient) {
               'type': 'fast'
             };
           personaje.info.money = 0;
+          personaje.info.atributos = {
+            'str':0,
+            'dex':0,
+            'con':0,
+            'int':0,
+            'wis':0,
+            'cha':0,
+          };
 
           method = 'createPj';
           break;
@@ -85,7 +104,12 @@ if (Meteor.isClient) {
       personaje.info.size = $('#char-size').val();
       personaje.info.experience.type = $('#char-experience-size').val();
       personaje.info.health.total = parseInt($('#char-hitpoints').val());
-
+      personaje.info.atributos.str = parseInt($('#char-attr-str').val());
+      personaje.info.atributos.dex = parseInt($('#char-attr-dex').val());
+      personaje.info.atributos.con = parseInt($('#char-attr-con').val());
+      personaje.info.atributos.int = parseInt($('#char-attr-int').val());
+      personaje.info.atributos.wis = parseInt($('#char-attr-wis').val());
+      personaje.info.atributos.cha = parseInt($('#char-attr-cha').val());
 
       Meteor.call(method,personaje,function(error, result){
         if (error) {
