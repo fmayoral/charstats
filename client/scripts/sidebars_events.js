@@ -22,4 +22,18 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.dashboardsidebar.events({
+    'click a': function (e) {
+      e.preventDefault();
+      switch($(e.currentTarget).attr('data-route')){
+        case 'dashboard':
+          Router.go('dashboard');
+          break;
+        case 'skills':
+          Router.go('skillsList');
+          break;
+      }
+    }
+  });
+
 }

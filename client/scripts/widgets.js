@@ -102,4 +102,28 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.widgetCombatManeuver.helpers({
+    cmb: function(){
+      var pj = Session.get('active-pj');
+      var cmb = 0;
+      if(pj){
+        cmb += parseInt(Tablas.core.classes[pj.info.class].getBaseAttackBonus(pj.info.experience.level)[0]);
+        cmb += parseInt(pj.modificadores.str);
+        cmb += parseInt(Tablas.core.charSize[pj.info.size].special_modifier);
+      }
+      return cmb;
+    },
+    cmd: function(){
+      var pj = Session.get('active-pj');
+      var cmd = 10;
+      if(pj){
+        cmd += parseInt(Tablas.core.classes[pj.info.class].getBaseAttackBonus(pj.info.experience.level)[0]);
+        cmd += parseInt(pj.modificadores.str);
+        cmd += parseInt(pj.modificadores.dex);
+        cmd += parseInt(Tablas.core.charSize[pj.info.size].special_modifier);
+      }
+      return cmd;
+    },
+  });
+
 }

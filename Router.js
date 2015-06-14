@@ -178,6 +178,25 @@ Router.route('/dashboard', function () {
   }
 );
 
+Router.route('/skills', function () {
+    if(Session.get('active-pj')){
+      this.layout('sideBarContainer');
+      this.render('skillsList', {
+        data: function () {
+          return Session.get('active-pj');
+        }
+      });
+      this.render('dashboardsidebar', {to: 'sidebar'});
+    } else {
+      Router.go('home');
+    }
+
+  },
+  {
+    name: 'skillsList'
+  }
+);
+
 Router.route('/files', function () {
     this.render('archivosList', {});
     if (Roles.userIsInRole(Meteor.user(), ['master'])) {
