@@ -16,7 +16,10 @@ if (Meteor.isClient) {
           Router.go('mastertools');
           break;
         case 'logout':
-          Meteor.logout();
+          var r = confirm("Esta seguro que desea salir?");
+          if (r === true) {
+            Meteor.logout();
+          }
           break;
       }
     }
