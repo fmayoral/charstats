@@ -14,6 +14,13 @@ if (Meteor.isClient) {
         Characters.update({'_id':charId},{'$set': {'position': position}});
       }
     },
+    updatePj: function(pj){
+      if (pj.owner == Meteor.user()._id) {
+        var result = Characters.update(pj._id, pj);
+        return result>0?{id: pj._id}:null;
+      }
+
+    }
 
   });
 }

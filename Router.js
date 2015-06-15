@@ -197,14 +197,33 @@ Router.route('/skills', function () {
   }
 );
 
+Router.route('/feats', function () {
+    if(Session.get('active-pj')){
+      this.layout('sideBarContainer');
+      this.render('featList', {
+        data: function () {
+          return Session.get('active-pj');
+        }
+      });
+      this.render('dashboardsidebar', {to: 'sidebar'});
+    } else {
+      Router.go('home');
+    }
+
+  },
+  {
+    name: 'featsList'
+  }
+);
+
 Router.route('/files', function () {
-    this.render('archivosList', {});
+    this.render('fileList', {});
     if (Roles.userIsInRole(Meteor.user(), ['master'])) {
       this.layout('sideBarContainer');
       this.render('mastertoolbar', {to: 'sidebar'});
     }
   },
   {
-    name: 'archivosList'
+    name: 'fileList'
   }
 );

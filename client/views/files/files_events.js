@@ -55,7 +55,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.archivosList.events({
+  Template.fileList.events({
     'click .del-archivo': function (event) {
       var fileId = $(event.currentTarget).closest('tr').attr('data-id');
       var r = confirm("Esta seguro que desea borrar el archivo?\nESTA ACCION NO SE PUEDE DESHACER");

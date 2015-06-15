@@ -1,16 +1,4 @@
 if (Meteor.isClient) {
-  Template.login.helpers({
-    userLogged: function () {
-      return Meteor.user();
-    }
-  });
-
-  Template.titulo.helpers({
-    appTitle: function(){
-      return 'Rolepack';
-    }
-  });
-
   Template.inventario.helpers({
     armas: function(){
       var pj = Session.get('active-pj');
@@ -107,6 +95,61 @@ if (Meteor.isClient) {
       response.progress = Math.floor(((pj.info.experience.current - pj.info.experience.prev_lvl) / (pj.info.experience.next_lvl - pj.info.experience.prev_lvl) ) * 100);
       return response;
     }
+  });
+
+  Template.featList.helpers({
+  });
+
+  Template.featsPj.helpers({
+    bundles: function(){
+      var pj = Session.get('active-pj');
+      return _.map(_.groupBy(pj.habilidades, function(hab) { return hab.bundle; }), function(val,key){return {key: key, habilidades: val};});
+    },
+    descripcion_bundle: function(){
+      return Habilidades[this.key].info;
+    },
+    nombre_bundle: function(){
+      return Habilidades[this.key].name;
+    },
+    habilidades: function(habList){
+      var responseList = [];
+      for (var i = 0; i < habList.length; i++) {
+        var habilidad = Habilidades[habList[i].bundle][habList[i].key];
+        habilidad.active = habList[i].active;
+        responseList.push(habilidad);
+      }
+      return _.sortBy(responseList, function(o){ return [o.pasive, o.name]; });
+    },
+
+  });
+
+  Template.allFeats.helpers({
+    bundles: function(){
+      var pj = Session.get('active-pj');
+      var bundles = [];
+      for (var key in Habilidades) {
+        if (Habilidades.hasOwnProperty(key)) {
+            var val = Object.keys(Habilidades[key]);
+            bundles.push({key: key, habilidades: _.without(val, 'info','name')});
+        }
+      }
+      return _.sortBy(bundles, 'key');
+    },
+    descripcion_bundle: function(){
+      return Habilidades[this.key].info;
+    },
+    nombre_bundle: function(){
+      return Habilidades[this.key].name;
+    },
+    habilidades: function(bundle){
+      var responseList = [];
+      for (var i = 0; i < bundle.habilidades.length; i++) {
+        var habilidad = Habilidades[bundle.key][bundle.habilidades[i]];
+        responseList.push(habilidad);
+      }
+      return _.sortBy(responseList, function(o){ return o.name; });
+    },
+
   });
 
 }

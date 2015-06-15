@@ -9,7 +9,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.archivosList.helpers({
+  Template.fileList.helpers({
     listaArchivos: function(){
       return Files.find({},{'sort':{'description':1,'type':1}});
     },

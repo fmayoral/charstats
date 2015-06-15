@@ -16,7 +16,7 @@ if (Meteor.isClient) {
           Router.go('npcList');
           break;
         case 'archivos':
-          Router.go('archivosList');
+          Router.go('fileList');
           break;
       }
     }
@@ -31,6 +31,9 @@ if (Meteor.isClient) {
           break;
         case 'skills':
           Router.go('skillsList');
+          break;
+        case 'feats':
+          Router.go('featsList');
           break;
       }
     }
