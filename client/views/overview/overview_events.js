@@ -39,4 +39,21 @@ if (Meteor.isClient) {
 
     }
   });
+
+  Template.spells.events({
+    'click .toggle-spell': function (e) {
+      e.preventDefault();
+      var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+      pj = Rolepack.funciones.toggleMagic(pj, this.key);
+      Meteor.call('updatePj',pj,function(error, result){
+        if (error) {
+          alert(error.message);
+        } else {
+          Rolepack.funciones.modifyCharForDisplay(pj);
+          $('#dtt-input').val('');
+        }
+      });
+
+    }
+  });
 }

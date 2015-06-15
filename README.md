@@ -2,11 +2,11 @@
 
 
 
-###Habilidades
+###Feats
 
 /lib/[bundle_id]/habilidad_id.js
 ```javascript
-Habilidades.[bundle_id].[habilidad_id] = {
+Feats.[bundle_id].[habilidad_id] = {
   key: habilidad_id,
   bundle: bundle_id,
   name: nombre_de_la_habilidad,

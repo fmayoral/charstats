@@ -19,7 +19,7 @@
         <div id="collapseListPjFeats{{this.key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListPjFeatsHeading{{this.key}}" aria-expanded="true">
           <div class="list-group">
             {{#each habilidades this.habilidades}}
-              <a class="list-group-item">
+              <a class="list-group-item" data-id="{{this.key}}">
                 {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
                 <h4 class="list-group-item-heading"><i class="fa fa-times remove-feat text-danger"></i> {{this.name}}</h4>
                 <p class="list-group-item-text">{{this.desc}}</p>
@@ -47,7 +47,7 @@
         <div id="collapseListAllFeats{{this.key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListAllFeatsHeading{{this.key}}" aria-expanded="true">
           <div class="list-group">
             {{#each habilidades this}}
-              <a class="list-group-item">
+              <a class="list-group-item" data-id="{{this.key}}">
                 {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
                 <h4 class="list-group-item-heading"><i class="fa fa-plus add-feat"></i> {{this.name}}</h4>
                 <p class="list-group-item-text">{{this.desc}}</p>

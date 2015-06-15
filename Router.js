@@ -16,7 +16,6 @@ var mustBeSignedIn = function(){
 Router.onBeforeAction(mustBeSignedIn, {except: ['login']});
 
 Router.onBeforeAction(function() {
-  //Session.set('active-pj', Personajes.findOne({'_id': Session.get('charName')}));
   var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
   if(pj){
     Rolepack.funciones.modifyCharForDisplay(pj);
