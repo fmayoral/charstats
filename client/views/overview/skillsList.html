@@ -1,0 +1,46 @@
+<template name="skillsList">
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="diceInput">Dice</label>
+      <input type="number" class="form-control" min="0" max="20" id="diceInput" placeholder="0" value={{diceValue}}>
+    </div>
+  </div>
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Skill Name</th>
+        <th>Total Bonus</th>
+        <th>Ability</th>
+        <th>Modifier</th>
+        <th>Ranks</th>
+        <th>Miscellaneous Modifier</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each skills}}
+        {{> skillRow}}
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5"></td>
+        <td>
+          x/{{maxRanks}}
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</template>
+
+<template name="skillRow">
+  <tr class="{{#if cantUse}}danger{{/if}}">
+    <td>{{#if clasea}}<i class="fa fa-certificate"></i>{{/if}}</td>
+    <td>{{this.name}}</td>
+    <td class="info"><strong>{{totalBonus aModifier ranks mModifier}}</strong></td>
+    <td class="text-uppercase">{{this.ability}}</td>
+    <td>{{aModifier}}</td>
+    <td>{{ranks}}</td>
+    <td>{{mModifier}}</td>
+  </tr>
+</template>

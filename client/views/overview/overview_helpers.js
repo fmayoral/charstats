@@ -183,4 +183,58 @@ if (Meteor.isClient) {
 
   });
 
+  Template.skillsList.helpers({
+    skills: function(){
+      var responseList = [];
+      for (var key in Tablas.core.skills) {
+        if (Tablas.core.skills.hasOwnProperty(key)) {
+            responseList.push(Tablas.core.skills[key]);
+        }
+      }
+      return _.sortBy(responseList, function(o){ return o.name; });
+    },
+    diceValue: function(){
+      var dice = Session.get('diceValue');
+      return dice;
+    },
+    maxRanks: function(){
+      var pj = Session.get('active-pj');
+      //@todo FALTA CALCULAR LOS RANKS POR RAZA Y ALGUN OTRO MOTIVO
+      return Tablas.core.classes[pj.info.class].getSkillRanks(pj);
+    }
+  });
+
+  Template.skillRow.helpers({
+    cantUse: function(){
+      //#todo verificar si tiene ranks asignados (o sea que esta entrenada)
+      return !this.untrained;
+    },
+    aModifier: function(){
+      var pj = Session.get('active-pj');
+      return pj.modificadores[this.ability];
+    },
+    ranks: function(){
+      console.log(this);
+      return 0;
+    },
+    mModifier: function(){
+      var mod = 0;
+      var pj = Session.get('active-pj');
+      var a = this.classes.indexOf(pj.info.class);
+      if (a!== -1) { mod +=3; }
+      //Armor check si asi lo inica la feat
+      return mod;
+    },
+    totalBonus: function(a,b,c){
+      var dice = Session.get('diceValue');
+      return a+b+c+parseInt(dice);
+    },
+    clasea: function(){
+      var pj = Session.get('active-pj');
+      var a = this.classes.indexOf(pj.info.class);
+      return a!== -1;
+    }
+
+  });
+
 }

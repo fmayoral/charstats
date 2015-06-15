@@ -3,6 +3,17 @@ if (Meteor.isClient) {
     Session.set('weapon-selected', null);
   };
 
+  Template.skillsList.rendered = function (){
+    Session.set('diceValue', 0);
+  };
+
+  Template.skillsList.events({
+    'change #diceInput, keyup #diceInput': function (e) {
+      var dice = $(e.target).val();
+      Session.set('diceValue', dice);
+    },
+  });
+
   Template.habilidades.rendered = function (){
     $('.feats').popover();
   };
