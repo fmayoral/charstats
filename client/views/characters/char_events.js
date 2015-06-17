@@ -69,6 +69,7 @@ if (Meteor.isClient) {
           personaje.type = 'user'; //type = npc for monsters and characters created by masters
           personaje.position = {};
           personaje.habilidades = [];
+          personaje.magic = [];
           personaje.weapons = [];
           personaje.skills = {};
 

@@ -211,6 +211,7 @@ if (Meteor.isClient) {
     cantUse: function(){
       var ranks = 0;
       var pj = Session.get('active-pj');
+      if(!pj.skills) { pj.skills = {}; }
       if(pj.skills.hasOwnProperty(this.key)) { ranks = pj.skills[this.key]; }
       return (!this.untrained && ranks === 0);
     },
@@ -221,6 +222,7 @@ if (Meteor.isClient) {
     ranks: function(){
       var ranks = 0;
       var pj = Session.get('active-pj');
+      if(!pj.skills) { pj.skills = {}; }
       if(pj.skills.hasOwnProperty(this.key)) { ranks = pj.skills[this.key]; }
       return ranks;
     },
@@ -229,6 +231,7 @@ if (Meteor.isClient) {
       var ranks = 0;
       var pj = Session.get('active-pj');
       var clasea = this.classes.indexOf(pj.info.class);
+      if(!pj.skills) { pj.skills = {}; }
       if(pj.skills.hasOwnProperty(this.key)) { ranks += pj.skills[this.key]; }
 
       if (clasea!== -1 && ranks>0) { mod +=3; }
