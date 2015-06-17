@@ -199,30 +199,46 @@ if (Meteor.isClient) {
     },
     maxRanks: function(){
       var pj = Session.get('active-pj');
-      //@todo FALTA CALCULAR LOS RANKS POR RAZA Y ALGUN OTRO MOTIVO
-      return Tablas.core.classes[pj.info.class].getSkillRanks(pj);
+      return Rolepack.funciones.maxRanks(pj);
+    },
+    usedRanks: function(){
+      var pj = Session.get('active-pj');
+      return Rolepack.funciones.usedRanks(pj);
     }
   });
 
   Template.skillRow.helpers({
     cantUse: function(){
-      //#todo verificar si tiene ranks asignados (o sea que esta entrenada)
-      return !this.untrained;
+      var ranks = 0;
+      var pj = Session.get('active-pj');
+      if(pj.skills.hasOwnProperty(this.key)) { ranks = pj.skills[this.key]; }
+      return (!this.untrained && ranks === 0);
     },
     aModifier: function(){
       var pj = Session.get('active-pj');
       return pj.modificadores[this.ability];
     },
     ranks: function(){
-      console.log(this);
-      return 0;
+      var ranks = 0;
+      var pj = Session.get('active-pj');
+      if(pj.skills.hasOwnProperty(this.key)) { ranks = pj.skills[this.key]; }
+      return ranks;
     },
     mModifier: function(){
       var mod = 0;
+      var ranks = 0;
       var pj = Session.get('active-pj');
-      var a = this.classes.indexOf(pj.info.class);
-      if (a!== -1) { mod +=3; }
+      var clasea = this.classes.indexOf(pj.info.class);
+      if(pj.skills.hasOwnProperty(this.key)) { ranks += pj.skills[this.key]; }
+
+      if (clasea!== -1 && ranks>0) { mod +=3; }
       //Armor check si asi lo inica la feat
+
+
+      //Agregar skills raciales
+      var raciales = Tablas.core.races[pj.info.race].bonus_skills;
+      if(raciales.hasOwnProperty(this.key)) { mod += raciales[this.key]; }
+
       return mod;
     },
     totalBonus: function(a,b,c){

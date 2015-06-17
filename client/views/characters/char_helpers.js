@@ -60,6 +60,11 @@ if (Meteor.isClient) {
         return 'selected';
       }
     },
+    selectedRace: function (parent) {
+      if(this && parent && this == parent.info.race) {
+        return 'selected';
+      }
+    },
     classes: function (){
       var response = [];
       var keys = Object.keys(Tablas.core.classes);
@@ -79,6 +84,17 @@ if (Meteor.isClient) {
     experiences: function (){
       var response = [];
       var keys = Object.keys(Tablas.core.experience);
+      for (var i = 0; i < keys.length; i++) {
+        response.push(Tablas.core.experience[keys[i]]);
+      }
+      return keys;
+    },
+    races: function (){
+      var response = [];
+      var keys = Object.keys(Tablas.core.races);
+      for (var i = 0; i < keys.length; i++) {
+        response.push(Tablas.core.races[keys[i]]);
+      }
       return keys;
     },
   });

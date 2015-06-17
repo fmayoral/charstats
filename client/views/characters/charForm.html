@@ -36,6 +36,28 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
+          <label for="char-race" class="col-sm-4 control-label">Race</label>
+          <div class="col-sm-8">
+            <select class="form-control" id="char-race">
+              {{#each races}}
+                <option value="{{this}}" {{selectedRace ..}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="char-other" class="col-sm-4 control-label">Other</label>
+          <div class="col-sm-8">
+            <input type="number" min="0" class="form-control" id="char-other" placeholder="Other" value="" disabled="disabled">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
           <label for="char-hitpoints" class="col-sm-4 control-label">Hitpoints</label>
           <div class="col-sm-8">
             <input type="number" min="0" class="form-control" id="char-hitpoints" placeholder="Hitpoints" value="{{this.info.health.total}}">

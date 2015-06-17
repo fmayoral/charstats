@@ -70,6 +70,7 @@ if (Meteor.isClient) {
           personaje.position = {};
           personaje.habilidades = [];
           personaje.weapons = [];
+          personaje.skills = {};
 
           personaje.owner = Meteor.user()._id;
 
@@ -100,6 +101,7 @@ if (Meteor.isClient) {
 
       //Asignar valores del formulario
       personaje.info.name = $('#char-name').val();
+      personaje.info.race = $('#char-race').val();
       personaje.info.class = $('#char-class').val();
       personaje.info.size = $('#char-size').val();
       personaje.info.experience.type = $('#char-experience-size').val();

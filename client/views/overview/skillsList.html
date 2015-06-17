@@ -10,26 +10,29 @@
       <tr>
         <th></th>
         <th>Skill Name</th>
-        <th>Total Bonus</th>
+        <th class="text-center">Total Bonus</th>
         <th>Ability</th>
-        <th>Modifier</th>
-        <th>Ranks</th>
-        <th>Miscellaneous Modifier</th>
+        <th class="text-center">Modifier</th>
+        <th class="text-center">Ranks {{usedRanks}}/{{maxRanks}}</th>
+        <th class="text-center">Miscellaneous Modifier</th>
       </tr>
     </thead>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th>Skill Name</th>
+        <th class="text-center">Total Bonus</th>
+        <th>Ability</th>
+        <th class="text-center">Modifier</th>
+        <th class="text-center">Ranks {{usedRanks}}/{{maxRanks}}</th>
+        <th class="text-center">Miscellaneous Modifier</th>
+      </tr>
+    </tfoot>
     <tbody>
       {{#each skills}}
         {{> skillRow}}
       {{/each}}
     </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="5"></td>
-        <td>
-          x/{{maxRanks}}
-        </td>
-      </tr>
-    </tfoot>
   </table>
 </template>
 
@@ -37,10 +40,10 @@
   <tr class="{{#if cantUse}}danger{{/if}}">
     <td>{{#if clasea}}<i class="fa fa-certificate"></i>{{/if}}</td>
     <td>{{this.name}}</td>
-    <td class="info"><strong>{{totalBonus aModifier ranks mModifier}}</strong></td>
-    <td class="text-uppercase">{{this.ability}}</td>
-    <td>{{aModifier}}</td>
-    <td>{{ranks}}</td>
-    <td>{{mModifier}}</td>
+    <td class="info text-center"><strong>{{totalBonus aModifier ranks mModifier}}</strong></td>
+    <td class="text-uppercase text">{{this.ability}}</td>
+    <td class="text-center">{{aModifier}}</td>
+    <td class="text-center"><button type="button" class="btn btn-danger btn-xs minus-rank">-</button> {{ranks}} <button type="button" class="btn btn-success btn-xs plus-rank">+</button></td>
+    <td class="text-center">{{mModifier}}</td>
   </tr>
 </template>

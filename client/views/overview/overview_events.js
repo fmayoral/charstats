@@ -67,4 +67,31 @@ if (Meteor.isClient) {
 
     }
   });
+
+  Template.skillRow.events({
+    'click .plus-rank': function (e) {
+      e.preventDefault();
+      var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+      pj = Rolepack.funciones.changeRank(pj, this.key, 1);
+      Meteor.call('updatePj',pj,function(error, result){
+        if (error) {
+          alert(error.message);
+        } else {
+          Rolepack.funciones.modifyCharForDisplay(pj);
+        }
+      });
+    },
+    'click .minus-rank': function (e) {
+      e.preventDefault();
+      var pj = Characters.findOne({'_id': Session.get('selected_char_id')});
+      pj = Rolepack.funciones.changeRank(pj, this.key, -1);
+      Meteor.call('updatePj',pj,function(error, result){
+        if (error) {
+          alert(error.message);
+        } else {
+          Rolepack.funciones.modifyCharForDisplay(pj);
+        }
+      });
+    }
+  });
 }

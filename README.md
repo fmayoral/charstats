@@ -112,6 +112,38 @@ Setea el tipo de round indicado en `roundType`
 
 ---
 ```javascript
+Rolepack.funciones.changeRank = function (pj, skill, value)
+```
+**return** (pj modificado)
+
+Suma `value` al skill indicado en `skill`
+
+---
+```javascript
+Rolepack.functiones.maxRanks = function (pj)
+```
+**return** (integer)
+
+Devuelve los rangos maximos que el pj puede asignar a sus skills
+
+---
+```javascript
+Rolepack.functiones.usedRanks = function (pj)
+```
+**return** (integer)
+
+Devuelve los rangos que el pj tiene asignados a sus skills
+
+---
+```javascript
+Rolepack.funciones.getPjLevel = function (pj)
+```
+**return** (integer)
+
+Devuelve el nivel de `pj`
+
+---
+```javascript
 Rolepack.funciones.modifyCharForDisplay = function (pj)
 ```
 **return** (pj modificado)
