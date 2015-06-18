@@ -1,0 +1,54 @@
+<template name="fileList">
+  <h2>Files</h2>
+    <table class="table">
+
+    <thead>
+      <tr>
+        {{#if isInRole 'master'}}<th>Id</th>{{/if}}
+        <th>Description</th>
+        <th>File Name</th>
+        <th>Type</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="{{#if isInRole 'master'}}5{{else}}4{{/if}}"></td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      {{#each listaArchivos}}
+        <tr data-id="{{_id}}">
+          {{#if isInRole 'master'}}
+            <td>
+              {{_id}}
+            </td>
+          {{/if}}
+          <td>
+            {{descripcion}}
+          </td>
+          <td>
+            {{file.original_name}}
+          </td>
+          <td>
+            {{type}}
+          </td>
+          <td>
+              <div class="btn-group btn-group-sm" role="group" aria-label="acciones">
+                <button type="button" class="btn btn-default ver-archivo"><i class="fa fa-eye"></i></button>
+                {{#if currentUser }}
+                  {{#if isInRole 'master'}}
+                    <button type="button" class="btn btn-default del-archivo"><i class="fa fa-remove"></i></button>
+                  {{/if}}
+                {{/if}}
+              </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{> fileUpload }}
+</template>

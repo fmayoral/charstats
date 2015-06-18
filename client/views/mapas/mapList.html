@@ -1,0 +1,56 @@
+<template name="mapList">
+  <h2>Maps</h2>
+    <table class="table">
+
+    <thead>
+      <tr>
+        {{#if isInRole 'master'}}<th>Id</th>{{/if}}
+        <th>Description</th>
+        <th>Width</th>
+        <th>Height</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="{{#if isInRole 'master'}}5{{else}}4{{/if}}"></td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      {{#each listaMapas}}
+        <tr data-id="{{_id}}">
+          {{#if isInRole 'master'}}
+            <td>
+              {{_id}}
+            </td>
+          {{/if}}
+          <td>
+            {{info.descripcion}}
+          </td>
+          <td>
+            {{info.ancho}}
+          </td>
+          <td>
+            {{info.alto}}
+          </td>
+          <td>
+              <div class="btn-group btn-group-sm" role="group" aria-label="acciones">
+                <button type="button" class="btn btn-default ver-mapa"><i class="fa fa-eye"></i></button>
+                {{#if currentUser }}
+                  {{#if isInRole 'jugador,master'}}
+                    <button type="button" class="btn btn-default play-mapa"><i class="fa fa-gamepad"></i></button>
+                  {{/if}}
+                  {{#if isInRole 'master'}}
+                    <button type="button" class="btn btn-default edit-mapa"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-default del-mapa"><i class="fa fa-remove"></i></button>
+                  {{/if}}
+                {{/if}}
+              </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>

@@ -99,9 +99,10 @@
     text-transform:capitalize;
     transition: background 1s;
 
+    @injuriesColor: #800000;
     .injuries-no-show (@i) when (@i < 10) {
       &[data-injuries="@{i}"] {
-        background: radial-gradient(#440000 0%, black 0%);
+        background: radial-gradient(@injuriesColor 0%, black 0%);
       }
       .injuries-no-show(@i + 1);
     }
@@ -111,7 +112,7 @@
     @incrementB: 1%;
     .injuries-progression (@i) when (@i < 90) {
       &[data-injuries="@{i}"] {
-        background: radial-gradient(#440000 @incrementA * @i, black @incrementB * @i);
+        background: radial-gradient(@injuriesColor @incrementA * @i, black @incrementB * @i);
       }
       .injuries-progression(@i + 1);
     }
@@ -119,7 +120,7 @@
 
     .injuries-maxed (@i) when (@i <= 100) {
       &[data-injuries="@{i}"] {
-        background: radial-gradient(#440000 30%, black 130%);
+        background: radial-gradient(@injuriesColor 30%, black 130%);
       }
       .injuries-maxed(@i + 1);
     }
