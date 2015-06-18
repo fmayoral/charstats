@@ -197,13 +197,12 @@ Router.route('/master-tools', function () {
 
 Router.route('/dashboard', function () {
     if(Session.get('active-pj')){
-      this.layout('sideBarContainer');
+      this.layout('simpleContainer');
       this.render('dashboard', {
         data: function () {
           return Session.get('active-pj');
         }
       });
-      this.render('dashboardsidebar', {to: 'sidebar'});
     } else {
       Router.go('home');
     }
@@ -216,13 +215,12 @@ Router.route('/dashboard', function () {
 
 Router.route('/skills', function () {
     if(Session.get('active-pj')){
-      this.layout('sideBarContainer');
+      this.layout('simpleContainer');
       this.render('skillsList', {
         data: function () {
           return Session.get('active-pj');
         }
       });
-      this.render('dashboardsidebar', {to: 'sidebar'});
     } else {
       Router.go('home');
     }
@@ -235,13 +233,12 @@ Router.route('/skills', function () {
 
 Router.route('/feats', function () {
     if(Session.get('active-pj')){
-      this.layout('sideBarContainer');
+      this.layout('simpleContainer');
       this.render('featList', {
         data: function () {
           return Session.get('active-pj');
         }
       });
-      this.render('dashboardsidebar', {to: 'sidebar'});
     } else {
       Router.go('home');
     }
