@@ -144,6 +144,15 @@ Devuelve el nivel de `pj`
 
 ---
 ```javascript
+Rolepack.funciones.getInitiative = function(pj, diceValue)
+```
+**return** (integer)
+`pj` debe ser el personaje que esta guardado en memoria ya que necesita tener aplicados los modificadores de su iniciativa
+
+Devuelve la iniciativa de `pj`
+
+---
+```javascript
 Rolepack.funciones.modifyCharForDisplay = function (pj)
 ```
 **return** (pj modificado)
