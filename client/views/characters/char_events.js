@@ -70,6 +70,7 @@ if (Meteor.isClient) {
           personaje.position = {};
           personaje.habilidades = [];
           personaje.magic = [];
+          personaje.traits = [];
           personaje.weapons = [];
           personaje.skills = {};
 
@@ -87,6 +88,7 @@ if (Meteor.isClient) {
               'type': 'fast'
             };
           personaje.info.money = 0;
+          personaje.info.initiative = 0;
           personaje.info.atributos = {
             'str':0,
             'dex':0,

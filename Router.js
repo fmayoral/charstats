@@ -21,6 +21,7 @@ var checkCharacter = function(){
     if(!pj.hasOwnProperty('owner')){ pj.owner = Meteor.user()._id; changes = true; }
     if(!pj.hasOwnProperty('habilidades')){ pj.habilidades = []; changes = true; }
     if(!pj.hasOwnProperty('magic')){ pj.magic = []; changes = true; }
+    if(!pj.hasOwnProperty('traits')){ pj.traits = []; changes = true; }
     if(!pj.hasOwnProperty('weapons')){ pj.weapons = []; changes = true; }
     if(!pj.hasOwnProperty('skills')){ pj.skills = {}; changes = true; }
     if(!pj.hasOwnProperty('info')){ pj.info = {}; changes = true; } else {
@@ -29,6 +30,7 @@ var checkCharacter = function(){
       if(!pj.info.hasOwnProperty('ataque_base')) { pj.info.ataque_base = [0]; changes = true; }
       if(!pj.info.hasOwnProperty('round_type')) { pj.info.round_type = 'full'; changes = true; }
       if(!pj.info.hasOwnProperty('experience')) { pj.info.experience = { 'current': 0, 'type': 'fast' }; changes = true; }
+      if(!pj.info.hasOwnProperty('initiative')) { pj.info.initiative = 0; changes = true; }
       if(!pj.info.hasOwnProperty('money')) { pj.info.money = 0; changes = true; }
       if(!pj.info.hasOwnProperty('atributos')) { pj.info.atributos = { 'str':10, 'dex':10, 'con':10, 'int':10, 'wis':10, 'cha':10 }; changes = true; }
     }
@@ -197,13 +199,12 @@ Router.route('/master-tools', function () {
 
 Router.route('/dashboard', function () {
     if(Session.get('active-pj')){
-      this.layout('sideBarContainer');
+      this.layout('simpleContainer');
       this.render('dashboard', {
         data: function () {
           return Session.get('active-pj');
         }
       });
-      this.render('dashboardsidebar', {to: 'sidebar'});
     } else {
       Router.go('home');
     }
@@ -216,13 +217,12 @@ Router.route('/dashboard', function () {
 
 Router.route('/skills', function () {
     if(Session.get('active-pj')){
-      this.layout('sideBarContainer');
+      this.layout('simpleContainer');
       this.render('skillsList', {
         data: function () {
           return Session.get('active-pj');
         }
       });
-      this.render('dashboardsidebar', {to: 'sidebar'});
     } else {
       Router.go('home');
     }
@@ -235,13 +235,12 @@ Router.route('/skills', function () {
 
 Router.route('/feats', function () {
     if(Session.get('active-pj')){
-      this.layout('sideBarContainer');
+      this.layout('simpleContainer');
       this.render('featList', {
         data: function () {
           return Session.get('active-pj');
         }
       });
-      this.render('dashboardsidebar', {to: 'sidebar'});
     } else {
       Router.go('home');
     }
