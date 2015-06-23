@@ -1,4 +1,8 @@
 if (Meteor.isClient) {
+  Template.mapaLayout.rendered = function(){
+    var position = { 'dist': 0, 'dX': 0, 'dY': 0};
+    Session.set('cameraPosition', position);
+  };
 
   Template.mapaForm.events({
     'change #anchoMapa, keyup #anchoMapa': function (e) {
@@ -85,6 +89,11 @@ if (Meteor.isClient) {
       Session.set('mapAction','play');
     },
 
+    'click .pj-camera': function(event){
+      Session.set('mapAction','camera');
+      Session.set('mapActionCameraButtonDown',false);
+    },
+
     'click .pj-target': function(event){
       Session.set('mapAction','target');
     },
@@ -97,6 +106,58 @@ if (Meteor.isClient) {
             alert(error.message);
           }
         });
+      }
+    },
+
+    'mousemove': function(event){
+      if(Session.get('mapAction') === 'camera' && Session.get('mapActionCameraButtonDown') && event.buttons > 0){
+        event.preventDefault();
+        originMousePosition = Session.get('originMousePosition');
+        if (originMousePosition) {
+          var position = Session.get('cameraPosition');
+          var newPosition = Session.get('deltaCameraPosition');
+          if(!newPosition) { newPosition = Session.get('cameraPosition'); }
+          worldWidth = 360 / window.innerWidth;
+          worldHeight = 180 / window.innerHeight;
+          newPosition.dX = -( (event.clientY - originMousePosition.y) * worldHeight );
+          newPosition.dY = -( (event.clientX - originMousePosition.x) * worldWidth );
+
+          var dX = position.dX+newPosition.dX;
+          if (dX < 0) { newPosition.dX = 0 - position.dX; }
+          if (dX > 85) { newPosition.dX = 85 - position.dX; }
+
+          var dY = position.dY+newPosition.dY;
+          if (dY < -150) { newPosition.dY = -150 - position.dY; }
+          if (dY > 150) { newPosition.dY = 180 - position.dY; }
+
+          Session.set('deltaCameraPosition', newPosition);
+        }
+      }
+    },
+
+    'mousedown': function(event){
+      if(Session.get('mapAction') === 'camera') {
+        Session.set('mapActionCameraButtonDown', true);
+        Session.set('originMousePosition', {
+          'x': event.clientX,
+          'y': event.clientY,
+        });
+      }
+    },
+
+    'mouseup': function(event){
+      if(Session.get('mapAction') === 'camera') {
+        Session.set('mapActionCameraButtonDown', false);
+        var position = Session.get('cameraPosition');
+        var deltaPosition = Session.get('deltaCameraPosition');
+        if(position && deltaPosition){
+          position.dist += deltaPosition.dist;
+          position.dX += deltaPosition.dX;
+          position.dY += deltaPosition.dY;
+          Session.set('cameraPosition', position);
+        }
+        Session.set('deltaCameraPosition', false);
+
       }
     },
 

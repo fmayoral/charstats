@@ -40,11 +40,19 @@ if (Meteor.isClient) {
   });
 
   Template.mapaLayout.helpers({
-    altura: function (){
-      if(this.info){
-        var altura = "height:"+this.info.alto *cellSize+"px;";
-        return altura;
+    styleCanvas: function (){
+      var transform, altura;
+      cp = Session.get('cameraPosition');
+      if(cp) {
+        dcp = Session.get('deltaCameraPosition');
+        if(!dcp) { dcp = {'dist':0, 'dX':0, 'dY':0}; }
+        transform = 'transform: translateZ(' + (cp.dist+dcp.dist) + 'px) rotateX(' + (cp.dX+dcp.dX) + 'deg) rotateZ(' + (cp.dY+dcp.dY) + 'deg)';
       }
+
+      if(this.info){
+        altura = "height:"+this.info.alto *cellSize+"px;";
+      }
+      return altura+transform;
     },
     position: function (){
       var pos = "top:"+this.position.index.r *cellSize+"px; left:"+this.position.index.c *cellSize+"px;";

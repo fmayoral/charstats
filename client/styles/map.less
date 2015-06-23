@@ -2,20 +2,16 @@
 
 #canvas {
   position: relative;
-  transition: .3s;
+  /* transition: .3s; */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  overflow: hidden;
 }
 
 div.canvas-wrapper {
   perspective: 1000px;
   margin-left: auto;
   margin-right: auto;
-}
-
-div.tresD {
-  transform: rotatex(50deg);
-  transform-origin: 0% 20%;
 }
 
 #canvas div {
