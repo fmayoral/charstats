@@ -135,7 +135,7 @@ if (Meteor.isClient) {
       }
     },
 
-    'mousedown .click-layer': function(event){
+    'mousedown': function(event){
       if(Session.get('mapAction') === 'camera') {
         Session.set('mapActionCameraButtonDown', true);
         Session.set('originMousePosition', {
