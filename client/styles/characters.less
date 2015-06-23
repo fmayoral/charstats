@@ -5,9 +5,21 @@
   background-color: transparent;
   transform-origin: 50% 50%;
   border: 0px solid black;
+  transform-style: preserve-3d;
+  transition: left 1s, top 1s;
 
   img {
     margin: 5px;
+  }
+
+  .flat, .stand-up {
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   &.size-fine{
@@ -15,6 +27,11 @@
     img { height: @char-fine - 8 ; width: @char-fine - 8 ; -webkit-border-radius: (@char-fine - 8) /2;}
     .flat {
       line-height: @char-fine - 3;
+      font-size: @char-fine / 2.75;
+    }
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-fine - @char-fine-height) /2) translateY( (-@char-fine-height)/2);
+      height: @char-fine-height; width: @char-fine;
       font-size: @char-fine / 2.75;
     }
   }
@@ -25,12 +42,22 @@
       line-height: @char-diminutive - 3;
       font-size: @char-diminutive / 2.75;
     }
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-diminutive - @char-diminutive-height) /2) translateY( (-@char-diminutive-height)/2);
+      height: @char-diminutive-height; width: @char-diminutive;
+      font-size: @char-diminutive / 2.75;
+    }
   }
   &.size-tiny{
     height: @char-tiny; width: @char-tiny;
     img { height: @char-tiny - 8 ; width: @char-tiny - 8 ; -webkit-border-radius: (@char-tiny - 8) /2;}
     .flat {
       line-height: @char-tiny - 3;
+      font-size: @char-tiny / 2.75;
+    }
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-tiny - @char-tiny-height) /2) translateY( (-@char-tiny-height)/2);
+      height: @char-tiny-height; width: @char-tiny;
       font-size: @char-tiny / 2.75;
     }
   }
@@ -41,12 +68,22 @@
       line-height: @char-small - 3;
       font-size: @char-small / 2.75;
     }
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-small - @char-small-height) /2) translateY( (-@char-small-height)/2);
+      height: @char-small-height; width: @char-small;
+      font-size: @char-small / 2.75;
+    }
   }
   &.size-medium{
     height: @char-medium; width: @char-medium;
     img { height: @char-medium - 8 ; width: @char-medium - 8 ; -webkit-border-radius: (@char-medium - 8) /2;}
     .flat {
       line-height: @char-medium - 3;
+      font-size: @char-medium / 2.75;
+    }
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-medium - @char-medium-height) /2) translateY( (-@char-medium-height)/2);
+      height: @char-medium-height; width: @char-medium;
       font-size: @char-medium / 2.75;
     }
   }
@@ -57,6 +94,22 @@
       line-height: @char-large - 3;
       font-size: @char-large / 2.75;
     }
+    .stand-up {
+      width: @char-large;
+      font-size: @char-large / 2.75;
+    }
+  }
+  &.size-large_tall {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-large - @char-large_tall-height) /2) translateY( (-@char-large_tall-height)/2);
+      height: @char-large_tall-height;
+    }
+  }
+  &.size-large_long {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-large - @char-large_long-height) /2) translateY( (-@char-large_long-height)/2);
+      height: @char-large_long-height;
+    }
   }
   &.size-huge_tall, &.size-huge_long{
     height: @char-huge; width: @char-huge;
@@ -64,6 +117,22 @@
     .flat {
       line-height: @char-huge - 3;
       font-size: @char-huge / 2.75;
+    }
+    .stand-up {
+      width: @char-huge;
+      font-size: @char-huge / 2.75;
+    }
+  }
+  &.size-huge_tall {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-huge - @char-huge_tall-height) /2) translateY( (-@char-huge_tall-height)/2);
+      height: @char-huge_tall-height;
+    }
+  }
+  &.size-huge_long {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-huge - @char-huge_long-height) /2) translateY( (-@char-huge_long-height)/2);
+      height: @char-huge_long-height;
     }
   }
   &.size-gargantuan_tall, &.size-gargantuan_long{
@@ -73,6 +142,22 @@
       line-height: @char-gargantuan - 3;
       font-size: @char-gargantuan / 2.75;
     }
+    .stand-up {
+      width: @char-gargantuan;
+      font-size: @char-gargantuan / 2.75;
+    }
+  }
+  &.size-gargantuan_tall {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-gargantuan - @char-gargantuan_tall-height) /2) translateY( (-@char-gargantuan_tall-height)/2);
+      height: @char-gargantuan_tall-height;
+    }
+  }
+  &.size-gargantuan_long {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-gargantuan - @char-gargantuan_long-height) /2) translateY( (-@char-gargantuan_long-height)/2);
+      height: @char-gargantuan_long-height;
+    }
   }
   &.size-colossal_tall, &.size-colossal_long{
     height: @char-colossal; width: @char-colossal;
@@ -80,6 +165,22 @@
     .flat {
       line-height: @char-colossal - 3;
       font-size: @char-colossal / 2.75;
+    }
+    .stand-up {
+      width: @char-colossal;
+      font-size: @char-colossal / 2.75;
+    }
+  }
+  &.size-colossal_tall {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-colossal - @char-colossal_tall-height) /2) translateY( (-@char-colossal_tall-height)/2);
+      height: @char-colossal_tall-height;
+    }
+  }
+  &.size-colossal_long {
+    .stand-up {
+      transform: rotateX(270deg) translateZ((@char-colossal - @char-colossal_long-height) /2) translateY( (-@char-colossal_long-height)/2);
+      height: @char-colossal_long-height;
     }
   }
 
@@ -128,6 +229,16 @@
 
   }
 
+  .stand-up {
+    transform-origin: 50% 50%;
+    border-top-left-radius:100%;
+    border-top-right-radius:100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none; //Non selectable
+    color: white;
+    text-align: center;
+  }
+
   &.current {
     z-index: 10;
     opacity: 0.8;
@@ -167,29 +278,7 @@ Druida Verde
 Paladin blanco
 
 npc marron
-*/
 
-
-
-
-.tresD > div.criatura > .flat {
-/*  background: radial-gradient(black, #dddddd); */
-}
-:not(.tresD) > div.criatura > .stand-up { display:none; }
-
-div.criatura > .stand-up {
-  transform-origin: 50% 100%;
-  transform: rotateX(-90deg)!important;
-  top: -75px!important;
-  height: 100px!important;
-  border-top-left-radius:12px;
-  border-top-right-radius:12px;
-}
-
-:not(.tresD) > div.criatura.char > .flat { background-image: url("img/char-flat.png"); }
-div.criatura.char > .stand-up { background-image: url("img/char-stand-up.png"); }
-
-/*
 Render de Criaturas
 Datos necesarios:
 -Orientacion
