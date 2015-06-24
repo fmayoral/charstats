@@ -6,7 +6,7 @@
   transform-origin: 50% 50%;
   border: 0px solid black;
   transform-style: preserve-3d;
-  transition: left 1s, top 1s;
+  transition: left @fast, top @fast, height @slow, width @slow;
 
   img {
     margin: 5px;
@@ -20,6 +20,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    transition: transform @slow, height @slow, width @slow, font-size @slow, line-height @slow, background @fast;
   }
 
   &.size-fine{
@@ -198,7 +199,6 @@
     color: white;
     font-weight: bold;
     text-transform:capitalize;
-    transition: background 1s;
 
     @injuriesColor: #800000;
     .injuries-no-show (@i) when (@i < 10) {

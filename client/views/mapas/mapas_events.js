@@ -109,8 +109,8 @@ if (Meteor.isClient) {
       }
     },
 
-    'mousemove': function(event){
-      if(Session.get('mapAction') === 'camera' && Session.get('mapActionCameraButtonDown') && event.buttons > 0){
+    'mousemove, touchmove': function(event){
+      if(Session.get('mapAction') === 'camera' && Session.get('mapActionCameraButtonDown') && (event.buttons > 0 || ( event.type === 'touchmove' && event.originalEvent.touches.length > 0 ))){
         event.preventDefault();
         originMousePosition = Session.get('originMousePosition');
         if (originMousePosition) {
@@ -119,8 +119,13 @@ if (Meteor.isClient) {
           if(!newPosition) { newPosition = Session.get('cameraPosition'); }
           worldWidth = 360 / window.innerWidth;
           worldHeight = 180 / window.innerHeight;
-          newPosition.dX = -( (event.clientY - originMousePosition.y) * worldHeight );
-          newPosition.dY = -( (event.clientX - originMousePosition.x) * worldWidth );
+          if(event.type === 'touchmove'){
+            newPosition.dX = -( (event.originalEvent.touches[0].clientY - originMousePosition.y) * worldHeight );
+            newPosition.dY = -( (event.originalEvent.touches[0].clientX - originMousePosition.x) * worldWidth );
+          } else {
+            newPosition.dX = -( (event.clientY - originMousePosition.y) * worldHeight );
+            newPosition.dY = -( (event.clientX - originMousePosition.x) * worldWidth );
+          }
 
           var dX = position.dX+newPosition.dX;
           if (dX < 0) { newPosition.dX = 0 - position.dX; }
@@ -135,29 +140,35 @@ if (Meteor.isClient) {
       }
     },
 
-    'mousedown': function(event){
+    'mousedown, touchstart': function(event){
       if(Session.get('mapAction') === 'camera') {
         Session.set('mapActionCameraButtonDown', true);
-        Session.set('originMousePosition', {
-          'x': event.clientX,
-          'y': event.clientY,
-        });
+        var position = {};
+        if(event.type === 'touchstart' && event.originalEvent.touches.length > 0) {
+            position.x = event.originalEvent.touches[0].clientX;
+            position.y = event.originalEvent.touches[0].clientY;
+        } else {
+          position.x = event.clientX;
+          position.y = event.clientY;
+        }
+        Session.set('originMousePosition', position);
       }
     },
 
-    'mouseup': function(event){
+    'mouseup, touchend': function(event){
       if(Session.get('mapAction') === 'camera') {
-        Session.set('mapActionCameraButtonDown', false);
-        var position = Session.get('cameraPosition');
-        var deltaPosition = Session.get('deltaCameraPosition');
-        if(position && deltaPosition){
-          position.dist += deltaPosition.dist;
-          position.dX += deltaPosition.dX;
-          position.dY += deltaPosition.dY;
-          Session.set('cameraPosition', position);
+        if((event.type === 'touchend' && event.originalEvent.touches.length === 0) || event.type === 'mouseup' ) {
+          Session.set('mapActionCameraButtonDown', false);
+          var position = Session.get('cameraPosition');
+          var deltaPosition = Session.get('deltaCameraPosition');
+          if(position && deltaPosition){
+            position.dist += deltaPosition.dist;
+            position.dX += deltaPosition.dX;
+            position.dY += deltaPosition.dY;
+            Session.set('cameraPosition', position);
+          }
+          Session.set('deltaCameraPosition', false);
         }
-        Session.set('deltaCameraPosition', false);
-
       }
     },
 
