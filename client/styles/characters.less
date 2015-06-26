@@ -233,33 +233,22 @@
     transform-origin: 50% 50%;
     border-top-left-radius:100%;
     border-top-right-radius:100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none; //Non selectable
     color: white;
     text-align: center;
   }
 
-  &.fighter {
-    .stand-up {
-      background-color: rgba(128, 0, 128, 0.5);
-    }
-  }
-  &.rogue {
-    .stand-up {
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-  }
-  &.oracle {
-    .stand-up {
-      background-color: rgba(128, 128, 0, 0.5);
-    }
-  }
-  &.wizard {
-    .stand-up {
-      background-color: rgba(0, 0, 128, 0.5);
-    }
-  }
-
+  //Class colors
+  &.fighter {.stand-up { background-color: rgba(128, 0, 128, 0.5); }}
+  &.rogue {.stand-up { background-color: rgba(0, 0, 0, 0.5); }}
+  &.oracle {.stand-up { background-color: rgba(128, 128, 0, 0.5); }}
+  &.wizard {.stand-up { background-color: rgba(0, 0, 128, 0.5); }}
+  &.ranger {.stand-up { background-color: rgba(128, 0, 0, 0.5); }}
+  &.cleric {.stand-up { background-color: rgba(128, 64, 0, 0.5); }}
+  &.druid {.stand-up { background-color: rgba(0, 128, 0, 0.5); }}
+  &.paladin {.stand-up { background-color: rgba(255, 255, 255, 0.5); }}
+  &.npc {.stand-up { background-color: rgba(128, 64, 0, 0.5); }}
 
 
   &.current {
