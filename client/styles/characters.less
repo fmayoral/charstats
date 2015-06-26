@@ -233,11 +233,34 @@
     transform-origin: 50% 50%;
     border-top-left-radius:100%;
     border-top-right-radius:100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     pointer-events: none; //Non selectable
     color: white;
     text-align: center;
   }
+
+  &.fighter {
+    .stand-up {
+      background-color: rgba(128, 0, 128, 0.5);
+    }
+  }
+  &.rogue {
+    .stand-up {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  &.oracle {
+    .stand-up {
+      background-color: rgba(128, 128, 0, 0.5);
+    }
+  }
+  &.wizard {
+    .stand-up {
+      background-color: rgba(0, 0, 128, 0.5);
+    }
+  }
+
+
 
   &.current {
     z-index: 10;
@@ -271,11 +294,12 @@
 /*
 Ranger  rojo
 Warrior  purpura
-Rogue  naranja
+Rogue  negro
 Clerigo amarillo
 Mago Azul
 Druida Verde
 Paladin blanco
+Oracle naranja
 
 npc marron
 
