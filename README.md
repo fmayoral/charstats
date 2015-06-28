@@ -17,7 +17,7 @@ Feats.[bundle_id].[habilidad_id] = {
       key: field_key,
       text: field_description
       values: function (pj){ //Always receive the active player
-        return []; //Must return array of values
+        return []; //Must return array of objects with format: { key: '', name: ''}
       }
     }
   ],

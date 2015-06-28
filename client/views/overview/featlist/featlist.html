@@ -72,7 +72,7 @@
             <select class="form-control" id="input_{{../key}}_{{key}}">
               <option value="" selected disabled hidden></option>
               {{#each valueList}}
-                <option value="{{this}}">{{this}}</option>
+                <option value="{{this.key}}">{{this.name}}</option>
               {{/each}}
             </select>
           {{/if}}
