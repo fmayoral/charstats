@@ -33,6 +33,7 @@ var checkCharacter = function(){
       if(!pj.info.hasOwnProperty('initiative')) { pj.info.initiative = 0; changes = true; }
       if(!pj.info.hasOwnProperty('money')) { pj.info.money = 0; changes = true; }
       if(!pj.info.hasOwnProperty('atributos')) { pj.info.atributos = { 'str':10, 'dex':10, 'con':10, 'int':10, 'wis':10, 'cha':10 }; changes = true; }
+      if(!pj.info.hasOwnProperty('combat_maneuvers')) { pj.info.combat_maneuvers = { 'defense': 0, 'bonus': 0}; changes = true; }
     }
     if(changes){
       console.log('PJ outdated .. trying to fix.');

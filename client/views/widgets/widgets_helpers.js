@@ -25,6 +25,7 @@ if (Meteor.isClient) {
       if(pj){
         cmb += parseInt(Tablas.core.classes[pj.info.class].getBaseAttackBonus(pj.info.experience.level)[0]);
         cmb += parseInt(pj.modificadores.str);
+        cmb += parseInt(pj.info.combat_maneuvers.bonus);
         cmb += parseInt(Tablas.core.charSize[pj.info.size].special_modifier);
       }
       return cmb;
@@ -36,6 +37,7 @@ if (Meteor.isClient) {
         cmd += parseInt(Tablas.core.classes[pj.info.class].getBaseAttackBonus(pj.info.experience.level)[0]);
         cmd += parseInt(pj.modificadores.str);
         cmd += parseInt(pj.modificadores.dex);
+        cmd += parseInt(pj.info.combat_maneuvers.defense);
         cmd += parseInt(Tablas.core.charSize[pj.info.size].special_modifier);
       }
       return cmd;
