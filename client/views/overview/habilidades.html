@@ -11,10 +11,17 @@
 
           {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
           <h4 class="list-group-item-heading"><i class="fa fa-toggle-{{#if this.active}}on{{else}}off{{/if}} toggle-feat"></i> {{this.name}}</h4>
-          <p class="list-group-item-text">{{this.desc}}</p>
+          {{> feat_desc this }}
         </a>
       {{/each}}
     </div>
   {{/each}}
 
+</template>
+
+<template name="feat_desc">
+  {{#each extraFields}}
+    <p>{{text}}: {{value}}</p>
+  {{/each}}
+  <p class="list-group-item-text">{{this.desc}}</p>
 </template>

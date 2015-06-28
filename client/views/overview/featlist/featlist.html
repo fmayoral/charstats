@@ -21,8 +21,8 @@
             {{#each habilidades this.habilidades}}
               <a class="list-group-item" data-id="{{this.key}}">
                 {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
-                <h4 class="list-group-item-heading"><i class="fa fa-times remove-feat text-danger"></i> {{this.name}}</h4>
-                <p class="list-group-item-text">{{this.desc}}</p>
+                <h4 class="list-group-item-heading"><button class="btn btn-default remove-feat"><i class="fa fa-times remove-feat text-danger"></i></button> {{this.name}}</h4>
+                {{> feat_desc this }}
               </a>
             {{/each}}
           </div>
@@ -47,15 +47,38 @@
         <div id="collapseListAllFeats{{this.key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListAllFeatsHeading{{this.key}}" aria-expanded="true">
           <div class="list-group">
             {{#each habilidades this}}
-              <a class="list-group-item" data-id="{{this.key}}">
-                {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
-                <h4 class="list-group-item-heading"><i class="fa fa-plus add-feat"></i> {{this.name}}</h4>
-                <p class="list-group-item-text">{{this.desc}}</p>
-              </a>
+              {{> addFeat}}
             {{/each}}
           </div>
         </div>
       </div>
     </div>
   {{/each}}
+</template>
+
+<template name="addFeat">
+  <a class="list-group-item" data-id="{{this.key}}">
+    {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
+    <h4 class="list-group-item-heading">{{#if this.pjHasIt}}<button type="button" class="btn btn-success" disabled="disabled"><i class="fa fa-check"></i></button>{{/if}}<button class="btn btn-default add-feat"><i class="fa fa-plus"></i></button> {{this.name}}</h4>
+    <p class="list-group-item-text">{{this.desc}}</p>
+    {{#if this.extra_fields}}
+      <div class="form-inline" id="form_{{this.key}}">
+      {{#each this.extra_fields}}
+        <div class="form-group">
+          <label for="input_{{../key}}_{{key}}">{{text}}</label>
+          {{#if singleValue}}
+            <input type="text" class="form-control" id="input_{{../key}}_{{key}}">
+          {{else}}
+            <select class="form-control" id="input_{{../key}}_{{key}}">
+              <option value="" selected disabled hidden></option>
+              {{#each valueList}}
+                <option value="{{this}}">{{this}}</option>
+              {{/each}}
+            </select>
+          {{/if}}
+        </div>
+      {{/each}}
+      </div>
+    {{/if}}
+  </a>
 </template>

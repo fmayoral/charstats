@@ -60,7 +60,7 @@ Router.onBeforeAction(function() {
     Rolepack.funciones.modifyCharForDisplay(pj);
   }
   this.next();
-}, {only: ['dashboard']});
+}, {except: ['login']});
 
 
 //Routes

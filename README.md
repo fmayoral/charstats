@@ -32,19 +32,21 @@ Rolepack.condiciones.[condicion_id] = function (pj, value) {
 
 ###Funciones
 ```javascript
-Rolepack.funciones.aplicarFeat = function (pj, feat)
+Rolepack.funciones.aplicarFeat = function (pj, feat, extra_fields)
 ```
 **return** (pj modificado)
 
 Aplica el efecto determinado por `feat.type` a `pj`
+`extra_fields` es opcional y contiene valores necesarios para calcular la feat
 
 ---
 ```javascript
-Rolepack.funciones.checkCondicion = function (pj, condicion)
+Rolepack.funciones.checkCondicion = function (pj, condicion, extra_fields)
 ```
 **return** (true/false)
 
 Verifica que `pj` cumpla con la condicion
+`extra_fields` es opcional y contiene valores necesarios para calcular la condicion
 
 ---
 ```javascript
