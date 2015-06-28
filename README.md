@@ -12,16 +12,25 @@ Feats.[bundle_id].[habilidad_id] = {
   name: nombre_de_la_habilidad,
   desc: descripcion,
   pasive: true/false,
-  condiciones: []
+  extra_fields: [ //optional
+    {
+      key: field_key,
+      text: field_description
+      values: function (pj){ //Always receive the active player
+        return []; //Must return array of values
+      }
+    }
+  ],
+  condiciones: [],
   efectos: []
 }
 
-Rolepack.efectos.[efecto_id] = function (pj, bonus) {
+Rolepack.efectos.[efecto_id] = function (pj, bonus, extra_fields) {
  (... modificar pj ...)
  return pj;
 }
 
-Rolepack.condiciones.[condicion_id] = function (pj, value) {
+Rolepack.condiciones.[condicion_id] = function (pj, value, extra_fields) {
   return true/false;
 }
 ```
