@@ -22,7 +22,8 @@ Feats.[bundle_id].[habilidad_id] = {
     }
   ],
   condiciones: [],
-  efectos: []
+  efectos: [],
+  url: url_a_la_feat_oficial
 }
 
 Rolepack.efectos.[efecto_id] = function (pj, bonus, extra_fields) {

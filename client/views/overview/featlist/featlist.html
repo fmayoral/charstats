@@ -21,7 +21,7 @@
             {{#each habilidades this.habilidades}}
               <a class="list-group-item" data-id="{{this.key}}">
                 {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
-                <h4 class="list-group-item-heading"><button class="btn btn-default remove-feat"><i class="fa fa-times remove-feat text-danger"></i></button> {{this.name}}</h4>
+                <h4 class="list-group-item-heading"><button class="btn btn-default remove-feat"><i class="fa fa-times remove-feat text-danger"></i></button> {{this.name}} {{> featInfoButton this}}</h4>
                 {{> feat_desc this }}
               </a>
             {{/each}}
@@ -59,7 +59,7 @@
 <template name="addFeat">
   <a class="list-group-item" data-id="{{this.key}}">
     {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
-    <h4 class="list-group-item-heading">{{#if this.pjHasIt}}<button type="button" class="btn btn-success" disabled="disabled"><i class="fa fa-check"></i></button>{{/if}}<button class="btn btn-default add-feat"><i class="fa fa-plus"></i></button> {{this.name}}</h4>
+    <h4 class="list-group-item-heading">{{#if this.pjHasIt}}<button type="button" class="btn btn-success" disabled="disabled"><i class="fa fa-check"></i></button>{{/if}}<button class="btn btn-default add-feat"><i class="fa fa-plus"></i></button> {{this.name}} {{> featInfoButton this}}</h4>
     <p class="list-group-item-text">{{this.desc}}</p>
     {{#if this.extra_fields}}
       <div class="form-inline" id="form_{{this.key}}">
@@ -67,7 +67,7 @@
         <div class="form-group">
           <label for="input_{{../key}}_{{key}}">{{text}}</label>
           {{#if singleValue}}
-            <input type="text" class="form-control" id="input_{{../key}}_{{key}}">
+            <input type="text" class="form-control" id="input_{{../key}}_{{key}}" value="{{getSingleValue.key}}">
           {{else}}
             <select class="form-control" id="input_{{../key}}_{{key}}">
               <option value="" selected disabled hidden></option>
@@ -81,4 +81,10 @@
       </div>
     {{/if}}
   </a>
+</template>
+
+<template name="featInfoButton">
+{{#if this.url}}
+<a role="button" href="{{this.url}}" target="_blank" class="btn btn-info btn-xs"><i class="fa fa-info"></i></a>
+{{/if}}
 </template>

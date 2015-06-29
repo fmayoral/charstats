@@ -10,7 +10,7 @@
         <a class="list-group-item {{ activationStatus }}">
 
           {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
-          <h4 class="list-group-item-heading"><i class="fa fa-toggle-{{#if this.active}}on{{else}}off{{/if}} toggle-feat"></i> {{this.name}}</h4>
+          <h4 class="list-group-item-heading"><i class="fa fa-toggle-{{#if this.active}}on{{else}}off{{/if}} toggle-feat"></i> {{this.name}} {{> featInfoButton this}}</h4>
           {{> feat_desc this }}
         </a>
       {{/each}}

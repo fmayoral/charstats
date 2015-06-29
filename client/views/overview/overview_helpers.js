@@ -21,7 +21,7 @@ if (Meteor.isClient) {
   Template.habilidades.helpers({
     bundles: function(){
       var pj = Session.get('active-pj');
-      return _.map(_.groupBy(pj.habilidades, function(hab) { return hab.bundle; }), function(val,key){return {key: key, habilidades: val};});
+      return _.sortBy(_.map(_.groupBy(pj.habilidades, function(hab) { return hab.bundle; }), function(val,key){return {key: key, habilidades: val};}), 'key');
     },
     descripcion_bundle: function(){
       return Feats[this.key].info.descripcion;

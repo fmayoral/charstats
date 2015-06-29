@@ -72,6 +72,12 @@ if (Meteor.isClient) {
       if (pj) { response = this.values(pj); }
       return response.length <= 1;
     },
+    getSingleValue: function(){
+      var pj = Session.get('active-pj');
+      var response = [];
+      if (pj) { response = this.values(pj); }
+      return response[0];
+    },
     valueList: function(){
       var pj = Session.get('active-pj');
       var response = [];
