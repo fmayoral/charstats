@@ -89,6 +89,7 @@ if (Meteor.isClient) {
             };
           personaje.info.money = 0;
           personaje.info.initiative = 0;
+          personaje.info.combat_maneuvers = { 'defense': 0, 'bonus': 0 };
           personaje.info.atributos = {
             'str':0,
             'dex':0,

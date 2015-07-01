@@ -54,7 +54,30 @@ Meteor.methods({
     } else {
       throw new Meteor.Error(403, "Not authorized to update this character");
     }
+  },
+  addFeatToPj: function(pj, feat){
+    var loggedInUser = Meteor.user();
+    if (pj.owner == loggedInUser._id) {
+      var result = Characters.update(
+         { _id: pj._id },
+         { $push: { habilidades: feat } }
+      );
+      return result>0?{id: pj._id}:null;
+    } else {
+      throw new Meteor.Error(403, "Not authorized to update this character");
+    }
+  },
+  removeFeatFromPj: function(pj, feat){
+    var loggedInUser = Meteor.user();
+    if(pj.owner == Meteor.user()._id){
+      Characters.update(
+        { _id: pj._id },
+        { $pull: { habilidades: { id: feat.id } } }
+      );
+    } else {
+      throw new Meteor.Error(403, "Not authorized to update this character");
+    }
+  },
 
-  }
 
 });

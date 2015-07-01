@@ -20,7 +20,24 @@ if (Meteor.isClient) {
         return result>0?{id: pj._id}:null;
       }
 
-    }
+    },
+    addFeatToPj: function(pj, feat){
+      if (pj.owner == Meteor.user()._id) {
+        var result = Characters.update(
+           { _id: pj._id },
+           { $push: { habilidades: feat } }
+        );
+        return result>0?{id: pj._id}:null;
+      }
+    },
+    removeFeatFromPj: function(pj, feat){
+      if (pj.owner == Meteor.user()._id) {
+        Characters.update(
+          { _id: pj._id },
+          { $pull: { habilidades: { id: feat.id } } }
+        );
+      }
+    },
 
   });
 }

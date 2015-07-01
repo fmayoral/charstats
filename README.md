@@ -12,16 +12,26 @@ Feats.[bundle_id].[habilidad_id] = {
   name: nombre_de_la_habilidad,
   desc: descripcion,
   pasive: true/false,
-  condiciones: []
-  efectos: []
+  extra_fields: [ //optional
+    {
+      key: field_key,
+      text: field_description
+      values: function (pj){ //Always receive the active player
+        return []; //Must return array of objects with format: { key: '', name: ''}
+      }
+    }
+  ],
+  condiciones: [],
+  efectos: [],
+  url: url_a_la_feat_oficial
 }
 
-Rolepack.efectos.[efecto_id] = function (pj, bonus) {
+Rolepack.efectos.[efecto_id] = function (pj, bonus, extra_fields) {
  (... modificar pj ...)
  return pj;
 }
 
-Rolepack.condiciones.[condicion_id] = function (pj, value) {
+Rolepack.condiciones.[condicion_id] = function (pj, value, extra_fields) {
   return true/false;
 }
 ```
@@ -32,19 +42,21 @@ Rolepack.condiciones.[condicion_id] = function (pj, value) {
 
 ###Funciones
 ```javascript
-Rolepack.funciones.aplicarFeat = function (pj, feat)
+Rolepack.funciones.aplicarFeat = function (pj, feat, extra_fields)
 ```
 **return** (pj modificado)
 
 Aplica el efecto determinado por `feat.type` a `pj`
+`extra_fields` es opcional y contiene valores necesarios para calcular la feat
 
 ---
 ```javascript
-Rolepack.funciones.checkCondicion = function (pj, condicion)
+Rolepack.funciones.checkCondicion = function (pj, condicion, extra_fields)
 ```
 **return** (true/false)
 
 Verifica que `pj` cumpla con la condicion
+`extra_fields` es opcional y contiene valores necesarios para calcular la condicion
 
 ---
 ```javascript
