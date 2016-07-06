@@ -1,0 +1,37 @@
+<template name="mapaLayout">
+  <div>
+    <p>
+      {{this.info.descripcion}}
+      <button type="button" class="btn btn-default btn-xs pj-camera {{isAction 'camera'}}">
+        <i class="fa fa-cube"></i>
+      </button>
+      <button type="button" class="btn btn-default btn-xs map-change">
+         <i class="fa fa-th"></i>
+      </button>
+      | actions
+      <button type="button" class="btn btn-default btn-xs pj-move {{isAction 'play'}}">
+        <i class="fa fa-user"></i>
+      </button>
+      <button type="button" class="btn btn-default btn-xs pj-target {{isAction 'target'}}">
+        <i class="fa fa-crosshairs"></i>
+      </button>
+      <button type="button" class="btn btn-default btn-xs pj-remove">
+        <i class="fa fa-trash-o fa-2"></i>
+      </button>
+      | {{actionTextHelper}}
+   </p>
+  </div>
+  <div class="canvas-wrapper" style="{{canvasWidth}}">
+    <div id="canvas" style="{{styleCanvas}}" data-id="{{_id}}">
+      <div class="background-mapa {{desc}}" style="{{backgroundStyle}}"></div>
+      <div class="background-grid" style="{{backgroundSize}}"></div>
+      {{#each npcs}}
+        <div class="{{estilo}} {{toLowerCase info.class}} criatura size-{{toLowerCase info.size}} {{isPjActive}}" style="{{position}}" data-id="{{_id}}" data-name="{{info.name}}">
+          <div class="flat" data-injuries="{{healthStatus info.health}}">{{shortName info.name}}</div>
+          <div class="stand-up" data-injuries="{{healthStatus info.health}}">{{shortName info.name}}</div>
+        </div>
+      {{/each}}
+      <div class="click-layer{{#if isTargeting}} hide{{/if}}" style="{{backgroundSize}}"></div>
+    </div>
+  </div>
+</template>

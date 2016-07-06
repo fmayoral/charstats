@@ -1,0 +1,90 @@
+<template name="featList">
+  {{> featsPj this}}
+  <hr>
+  {{> allFeats this}}
+</template>
+
+<template name="featsPj">
+  <h3>Selected Feats</h3>
+  {{#each bundles}}
+    <div class="panel-group" role="tablist">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="collapseListPjFeatsHeading{{this.key}}">
+          <h4 class="panel-title" id="-collapsible-list-pj-feats-{{this.key}}">
+            <a class="" data-toggle="collapse" href="#collapseListPjFeats{{this.key}}" aria-expanded="true" aria-controls="collapseListPjFeats{{this.key}}">
+              {{nombre_bundle}}
+            </a><span class="small">{{descripcion_bundle}}</span>
+          </h4>
+        </div>
+        <div id="collapseListPjFeats{{this.key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListPjFeatsHeading{{this.key}}" aria-expanded="true">
+          <div class="list-group">
+            {{#each habilidades this.habilidades}}
+              <a class="list-group-item" data-id="{{this.key}}">
+                {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
+                <h4 class="list-group-item-heading"><button class="btn btn-default remove-feat"><i class="fa fa-times remove-feat text-danger"></i></button> {{this.name}} {{> featInfoButton this}}</h4>
+                {{> feat_desc this }}
+              </a>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</template>
+
+<template name="allFeats">
+  <h3>All Feats</h3>
+  {{#each bundles}}
+    <div class="panel-group" role="tablist">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="collapseListAllFeatsHeading{{this.key}}">
+          <h4 class="panel-title" id="-collapsible-list-all-feats-{{this.key}}">
+            <a class="" data-toggle="collapse" href="#collapseListAllFeats{{this.key}}" aria-expanded="true" aria-controls="collapseListAllFeats{{this.key}}">
+              {{nombre_bundle}}
+            </a><span class="small">{{descripcion_bundle}}</span>
+          </h4>
+        </div>
+        <div id="collapseListAllFeats{{this.key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListAllFeatsHeading{{this.key}}" aria-expanded="true">
+          <div class="list-group">
+            {{#each habilidades this}}
+              {{> addFeat}}
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</template>
+
+<template name="addFeat">
+  <a class="list-group-item" data-id="{{this.key}}">
+    {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
+    <h4 class="list-group-item-heading">{{#if this.pjHasIt}}<button type="button" class="btn btn-success" disabled="disabled"><i class="fa fa-check"></i></button>{{/if}}<button class="btn btn-default add-feat"><i class="fa fa-plus"></i></button> {{this.name}} {{> featInfoButton this}}</h4>
+    <p class="list-group-item-text">{{this.desc}}</p>
+    {{#if this.extra_fields}}
+      <div class="form-inline" id="form_{{this.key}}">
+      {{#each this.extra_fields}}
+        <div class="form-group">
+          <label for="input_{{../key}}_{{key}}">{{text}}</label>
+          {{#if singleValue}}
+            <input type="text" class="form-control" id="input_{{../key}}_{{key}}" value="{{getSingleValue.key}}">
+          {{else}}
+            <select class="form-control" id="input_{{../key}}_{{key}}">
+              <option value="" selected disabled hidden></option>
+              {{#each valueList}}
+                <option value="{{this.key}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          {{/if}}
+        </div>
+      {{/each}}
+      </div>
+    {{/if}}
+  </a>
+</template>
+
+<template name="featInfoButton">
+{{#if this.url}}
+<a role="button" href="{{this.url}}" target="_blank" class="btn btn-info btn-xs"><i class="fa fa-info"></i></a>
+{{/if}}
+</template>

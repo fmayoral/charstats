@@ -1,0 +1,23 @@
+<template name="widgetBar">
+  <div class="radial-progress {{ this.color }}" data-progress="{{ this.progress }}">
+    <div class="circle">
+      <div class="mask full">
+        <div class="fill"></div>
+      </div>
+      <div class="mask half">
+        <div class="fill"></div>
+        <div class="fill fix"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+    <div class="inset">
+      <div class="percentage">
+        <div class="numbers">
+          <span>{{ this.value }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4>{{ this.label}}</h4>
+  <span class="text-muted">{{ this.info }}</span>
+</template>

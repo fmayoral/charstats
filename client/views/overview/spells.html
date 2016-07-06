@@ -1,0 +1,20 @@
+<template name="spells">
+
+  {{#each bundles}}
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-info">
+        <h4 class="list-group-item-heading">{{nombre_bundle}}</h4>
+        <p class="list-group-item-text">{{descripcion_bundle}}</p>
+      </a>
+      {{#each spells this.magic}}
+        <a class="list-group-item {{ activationStatus }}">
+
+          {{#if this.pasive}}<span class="badge">Pasiva</span>{{/if}}
+          <h4 class="list-group-item-heading"><i class="fa fa-toggle-{{#if this.active}}on{{else}}off{{/if}} toggle-spell"></i> {{this.name}}</h4>
+          <p class="list-group-item-text">{{this.desc}}</p>
+        </a>
+      {{/each}}
+    </div>
+  {{/each}}
+
+</template>

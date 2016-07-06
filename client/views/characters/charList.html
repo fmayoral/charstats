@@ -1,0 +1,15 @@
+<template name="charList">
+  <div class="list-group">
+    {{#each userChars}}
+      <a href="#" class="list-group-item{{#if isCharActive}} active{{/if}} select-char" data-id="{{this._id}}">{{this.info.name}}</a>
+    {{else}}
+      <a href="#" class="list-group-item disabled">No posee ningun personaje</a>
+    {{/each}}
+  </div>
+
+  <div class="list-group">
+    <a href="#" class="list-group-item new-char"><i class="fa fa-plus"></i> Crear nuevo</a>
+    <a href="#" class="list-group-item edit-char"><i class="fa fa-pencil"></i> Editar seleccionado</a>
+    <a href="#" class="list-group-item remove-char"><i class="fa fa-minus"></i> Borrar seleccionado</a>
+  </div>
+</template>
